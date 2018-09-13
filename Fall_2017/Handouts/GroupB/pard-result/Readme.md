@@ -1,0 +1,5 @@
+截屏为3个未执行的查询的执行过程，结果重定向到文件result.output.
+截屏只显示元组数和执行时间，以及语义检查等信息等。
+queryPlan为上次未检查的plan，未实现的已经在文件名上注明。
+因为大部分join我们都进行了下推，但是执行过程会重新shuffle数据，所以显得比Gold Standard复杂。
+我们正在检查在下推后和gold standard能match多少。

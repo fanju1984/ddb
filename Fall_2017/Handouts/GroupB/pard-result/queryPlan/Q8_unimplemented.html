@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Query Plan Show</title>
+<meta name="description" content="" />
+<!-- Copyright 1998-2016 by Northwoods Software Corporation. -->
+<meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/go.js"></script>
+    <script src="js/flow-desinger.js"></script>
+    <script src="js/flow-display.js"></script>
+</head>
+<body>
+<div id="sample" style="width:80%;margin: 0 auto">
+  <div style="width:100%; white-space:nowrap;">
+    <!--  控件 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:110px">
+      <div id="myPaletteDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+
+    <!--  设计面板 -->
+    
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:10620px">
+      <div id="myFlowDesignerDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+  <div>
+    <div>
+      <button id="btnCreate" onclick="doCreateStep()">新建步骤</button>
+      <button id="btnSave" onclick="saveDesigner()">保存设计图</button>
+    </div>
+    <textarea id="mySavedModel" style="width:100%;height:300px">
+{
+ "class": "go.GraphLinksModel",
+ "modelData": {"position": "-100 -5"},
+ "nodeDataArray":  [
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "OutputNode1",
+   "loc": "6480 60",
+   "stepType": 1,
+   "text": "name:OUTPUT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT2",
+   "loc": "6480 200",
+   "stepType": 0,
+   "text": "columns:[customer.name,orders.quantity,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER3",
+   "loc": "6480 400",
+   "stepType": 0,
+   "text": "expression:((((customer.id = orders.customer_id) AND (book.id = orders.book_id)) AND (customer.rank = 1)) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "UNION4",
+   "loc": "6480 600",
+   "stepType": 0,
+   "text": "name:UNION\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN5",
+   "loc": "540 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN6",
+   "loc": "1620 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN7",
+   "loc": "2700 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN8",
+   "loc": "3780 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN9",
+   "loc": "4860 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN10",
+   "loc": "5940 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN11",
+   "loc": "7020 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN12",
+   "loc": "8100 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN13",
+   "loc": "9180 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN14",
+   "loc": "10260 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN15",
+   "loc": "11340 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN16",
+   "loc": "12420 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(book.id = orders.book_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN17",
+   "loc": "270 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT18",
+   "loc": "810 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN19",
+   "loc": "1350 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT20",
+   "loc": "1890 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN21",
+   "loc": "2430 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT22",
+   "loc": "2970 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN23",
+   "loc": "3510 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT24",
+   "loc": "4050 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN25",
+   "loc": "4590 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT26",
+   "loc": "5130 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN27",
+   "loc": "5670 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT28",
+   "loc": "6210 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN29",
+   "loc": "6750 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT30",
+   "loc": "7290 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN31",
+   "loc": "7830 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT32",
+   "loc": "8370 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN33",
+   "loc": "8910 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT34",
+   "loc": "9450 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN35",
+   "loc": "9990 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT36",
+   "loc": "10530 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN37",
+   "loc": "11070 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT38",
+   "loc": "11610 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN39",
+   "loc": "12150 1000",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT40",
+   "loc": "12690 1000",
+   "stepType": 0,
+   "text": "columns:[book.copies,book.id,book.title]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT41",
+   "loc": "270 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN42",
+   "loc": "540 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER43",
+   "loc": "810 1200",
+   "stepType": 0,
+   "text": "expression:((book.id < 205000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT44",
+   "loc": "1080 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN45",
+   "loc": "1350 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER46",
+   "loc": "1890 1200",
+   "stepType": 0,
+   "text": "expression:((book.id < 205000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT47",
+   "loc": "1890 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN48",
+   "loc": "2160 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER49",
+   "loc": "2970 1200",
+   "stepType": 0,
+   "text": "expression:((book.id < 205000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT50",
+   "loc": "2700 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN51",
+   "loc": "2970 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER52",
+   "loc": "4050 1200",
+   "stepType": 0,
+   "text": "expression:((book.id < 205000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT53",
+   "loc": "3510 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN54",
+   "loc": "3780 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER55",
+   "loc": "5130 1200",
+   "stepType": 0,
+   "text": "expression:((book.id >= 210000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT56",
+   "loc": "4320 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN57",
+   "loc": "4590 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER58",
+   "loc": "6210 1200",
+   "stepType": 0,
+   "text": "expression:((book.id >= 210000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT59",
+   "loc": "5130 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN60",
+   "loc": "5400 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER61",
+   "loc": "7290 1200",
+   "stepType": 0,
+   "text": "expression:((book.id >= 210000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT62",
+   "loc": "5940 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN63",
+   "loc": "6210 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER64",
+   "loc": "8370 1200",
+   "stepType": 0,
+   "text": "expression:((book.id >= 210000) AND (book.copies > 5000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT65",
+   "loc": "6750 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN66",
+   "loc": "7020 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER67",
+   "loc": "9450 1200",
+   "stepType": 0,
+   "text": "expression:((book.copies > 5000) AND ((book.id < 210000) AND (book.id >= 205000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT68",
+   "loc": "7560 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN69",
+   "loc": "7830 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER70",
+   "loc": "10530 1200",
+   "stepType": 0,
+   "text": "expression:((book.copies > 5000) AND ((book.id < 210000) AND (book.id >= 205000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT71",
+   "loc": "8370 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN72",
+   "loc": "8640 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER73",
+   "loc": "11610 1200",
+   "stepType": 0,
+   "text": "expression:((book.copies > 5000) AND ((book.id < 210000) AND (book.id >= 205000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT74",
+   "loc": "9180 1200",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.book_id,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN75",
+   "loc": "9450 1200",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER76",
+   "loc": "12690 1200",
+   "stepType": 0,
+   "text": "expression:((book.copies > 5000) AND ((book.id < 210000) AND (book.id >= 205000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER77",
+   "loc": "270 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT78",
+   "loc": "540 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT79",
+   "loc": "810 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN80",
+   "loc": "810 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER81",
+   "loc": "1080 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT82",
+   "loc": "1620 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT83",
+   "loc": "1890 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN84",
+   "loc": "1890 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER85",
+   "loc": "1890 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT86",
+   "loc": "2700 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT87",
+   "loc": "2970 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN88",
+   "loc": "2970 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER89",
+   "loc": "2700 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT90",
+   "loc": "3780 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT91",
+   "loc": "4050 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN92",
+   "loc": "4050 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER93",
+   "loc": "3510 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT94",
+   "loc": "4860 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT95",
+   "loc": "5130 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN96",
+   "loc": "5130 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER97",
+   "loc": "4320 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT98",
+   "loc": "5940 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT99",
+   "loc": "6210 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN100",
+   "loc": "6210 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER101",
+   "loc": "5130 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT102",
+   "loc": "7020 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT103",
+   "loc": "7290 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN104",
+   "loc": "7290 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER105",
+   "loc": "5940 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT106",
+   "loc": "8100 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT107",
+   "loc": "8370 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN108",
+   "loc": "8370 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER109",
+   "loc": "6750 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT110",
+   "loc": "9180 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT111",
+   "loc": "9450 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN112",
+   "loc": "9450 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER113",
+   "loc": "7560 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT114",
+   "loc": "10260 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT115",
+   "loc": "10530 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN116",
+   "loc": "10530 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER117",
+   "loc": "8370 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT118",
+   "loc": "11340 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT119",
+   "loc": "11610 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN120",
+   "loc": "11610 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER121",
+   "loc": "9180 1400",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT122",
+   "loc": "12420 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT123",
+   "loc": "12690 1400",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.rank]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN124",
+   "loc": "12690 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:book\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN125",
+   "loc": "270 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN126",
+   "loc": "540 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER127",
+   "loc": "810 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN128",
+   "loc": "1080 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN129",
+   "loc": "1620 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER130",
+   "loc": "1890 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN131",
+   "loc": "1890 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN132",
+   "loc": "2700 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER133",
+   "loc": "2970 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN134",
+   "loc": "2700 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard3\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN135",
+   "loc": "3780 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER136",
+   "loc": "4050 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN137",
+   "loc": "3510 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN138",
+   "loc": "4860 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER139",
+   "loc": "5130 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN140",
+   "loc": "4320 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN141",
+   "loc": "5940 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER142",
+   "loc": "6210 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN143",
+   "loc": "5130 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN144",
+   "loc": "7020 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER145",
+   "loc": "7290 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN146",
+   "loc": "5940 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard3\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN147",
+   "loc": "8100 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER148",
+   "loc": "8370 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN149",
+   "loc": "6750 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN150",
+   "loc": "9180 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER151",
+   "loc": "9450 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN152",
+   "loc": "7560 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN153",
+   "loc": "10260 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER154",
+   "loc": "10530 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN155",
+   "loc": "8370 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN156",
+   "loc": "11340 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER157",
+   "loc": "11610 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN158",
+   "loc": "9180 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard3\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN159",
+   "loc": "12420 1600",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER160",
+   "loc": "12690 1600",
+   "stepType": 0,
+   "text": "expression:(customer.rank = 1)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN161",
+   "loc": "810 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN162",
+   "loc": "1890 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN163",
+   "loc": "2970 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN164",
+   "loc": "4050 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN165",
+   "loc": "5130 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN166",
+   "loc": "6210 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN167",
+   "loc": "7290 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN168",
+   "loc": "8370 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN169",
+   "loc": "9450 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN170",
+   "loc": "10530 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN171",
+   "loc": "11610 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN172",
+   "loc": "12690 1800",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  }
+ ],
+ "linkDataArray":  [
+    {
+   "from": "OutputNode1",
+   "to": "PROJECT2"
+  },
+    {
+   "from": "PROJECT2",
+   "to": "FILTER3"
+  },
+    {
+   "from": "FILTER3",
+   "to": "UNION4"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN5"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN6"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN7"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN8"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN9"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN10"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN11"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN12"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN13"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN14"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN15"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN16"
+  },
+    {
+   "from": "JOIN5",
+   "to": "JOIN17"
+  },
+    {
+   "from": "JOIN5",
+   "to": "PROJECT18"
+  },
+    {
+   "from": "JOIN6",
+   "to": "JOIN19"
+  },
+    {
+   "from": "JOIN6",
+   "to": "PROJECT20"
+  },
+    {
+   "from": "JOIN7",
+   "to": "JOIN21"
+  },
+    {
+   "from": "JOIN7",
+   "to": "PROJECT22"
+  },
+    {
+   "from": "JOIN8",
+   "to": "JOIN23"
+  },
+    {
+   "from": "JOIN8",
+   "to": "PROJECT24"
+  },
+    {
+   "from": "JOIN9",
+   "to": "JOIN25"
+  },
+    {
+   "from": "JOIN9",
+   "to": "PROJECT26"
+  },
+    {
+   "from": "JOIN10",
+   "to": "JOIN27"
+  },
+    {
+   "from": "JOIN10",
+   "to": "PROJECT28"
+  },
+    {
+   "from": "JOIN11",
+   "to": "JOIN29"
+  },
+    {
+   "from": "JOIN11",
+   "to": "PROJECT30"
+  },
+    {
+   "from": "JOIN12",
+   "to": "JOIN31"
+  },
+    {
+   "from": "JOIN12",
+   "to": "PROJECT32"
+  },
+    {
+   "from": "JOIN13",
+   "to": "JOIN33"
+  },
+    {
+   "from": "JOIN13",
+   "to": "PROJECT34"
+  },
+    {
+   "from": "JOIN14",
+   "to": "JOIN35"
+  },
+    {
+   "from": "JOIN14",
+   "to": "PROJECT36"
+  },
+    {
+   "from": "JOIN15",
+   "to": "JOIN37"
+  },
+    {
+   "from": "JOIN15",
+   "to": "PROJECT38"
+  },
+    {
+   "from": "JOIN16",
+   "to": "JOIN39"
+  },
+    {
+   "from": "JOIN16",
+   "to": "PROJECT40"
+  },
+    {
+   "from": "JOIN17",
+   "to": "PROJECT41"
+  },
+    {
+   "from": "JOIN17",
+   "to": "JOIN42"
+  },
+    {
+   "from": "PROJECT18",
+   "to": "FILTER43"
+  },
+    {
+   "from": "JOIN19",
+   "to": "PROJECT44"
+  },
+    {
+   "from": "JOIN19",
+   "to": "JOIN45"
+  },
+    {
+   "from": "PROJECT20",
+   "to": "FILTER46"
+  },
+    {
+   "from": "JOIN21",
+   "to": "PROJECT47"
+  },
+    {
+   "from": "JOIN21",
+   "to": "JOIN48"
+  },
+    {
+   "from": "PROJECT22",
+   "to": "FILTER49"
+  },
+    {
+   "from": "JOIN23",
+   "to": "PROJECT50"
+  },
+    {
+   "from": "JOIN23",
+   "to": "JOIN51"
+  },
+    {
+   "from": "PROJECT24",
+   "to": "FILTER52"
+  },
+    {
+   "from": "JOIN25",
+   "to": "PROJECT53"
+  },
+    {
+   "from": "JOIN25",
+   "to": "JOIN54"
+  },
+    {
+   "from": "PROJECT26",
+   "to": "FILTER55"
+  },
+    {
+   "from": "JOIN27",
+   "to": "PROJECT56"
+  },
+    {
+   "from": "JOIN27",
+   "to": "JOIN57"
+  },
+    {
+   "from": "PROJECT28",
+   "to": "FILTER58"
+  },
+    {
+   "from": "JOIN29",
+   "to": "PROJECT59"
+  },
+    {
+   "from": "JOIN29",
+   "to": "JOIN60"
+  },
+    {
+   "from": "PROJECT30",
+   "to": "FILTER61"
+  },
+    {
+   "from": "JOIN31",
+   "to": "PROJECT62"
+  },
+    {
+   "from": "JOIN31",
+   "to": "JOIN63"
+  },
+    {
+   "from": "PROJECT32",
+   "to": "FILTER64"
+  },
+    {
+   "from": "JOIN33",
+   "to": "PROJECT65"
+  },
+    {
+   "from": "JOIN33",
+   "to": "JOIN66"
+  },
+    {
+   "from": "PROJECT34",
+   "to": "FILTER67"
+  },
+    {
+   "from": "JOIN35",
+   "to": "PROJECT68"
+  },
+    {
+   "from": "JOIN35",
+   "to": "JOIN69"
+  },
+    {
+   "from": "PROJECT36",
+   "to": "FILTER70"
+  },
+    {
+   "from": "JOIN37",
+   "to": "PROJECT71"
+  },
+    {
+   "from": "JOIN37",
+   "to": "JOIN72"
+  },
+    {
+   "from": "PROJECT38",
+   "to": "FILTER73"
+  },
+    {
+   "from": "JOIN39",
+   "to": "PROJECT74"
+  },
+    {
+   "from": "JOIN39",
+   "to": "JOIN75"
+  },
+    {
+   "from": "PROJECT40",
+   "to": "FILTER76"
+  },
+    {
+   "from": "PROJECT41",
+   "to": "FILTER77"
+  },
+    {
+   "from": "JOIN42",
+   "to": "PROJECT78"
+  },
+    {
+   "from": "JOIN42",
+   "to": "PROJECT79"
+  },
+    {
+   "from": "FILTER43",
+   "to": "TABLESCAN80"
+  },
+    {
+   "from": "PROJECT44",
+   "to": "FILTER81"
+  },
+    {
+   "from": "JOIN45",
+   "to": "PROJECT82"
+  },
+    {
+   "from": "JOIN45",
+   "to": "PROJECT83"
+  },
+    {
+   "from": "FILTER46",
+   "to": "TABLESCAN84"
+  },
+    {
+   "from": "PROJECT47",
+   "to": "FILTER85"
+  },
+    {
+   "from": "JOIN48",
+   "to": "PROJECT86"
+  },
+    {
+   "from": "JOIN48",
+   "to": "PROJECT87"
+  },
+    {
+   "from": "FILTER49",
+   "to": "TABLESCAN88"
+  },
+    {
+   "from": "PROJECT50",
+   "to": "FILTER89"
+  },
+    {
+   "from": "JOIN51",
+   "to": "PROJECT90"
+  },
+    {
+   "from": "JOIN51",
+   "to": "PROJECT91"
+  },
+    {
+   "from": "FILTER52",
+   "to": "TABLESCAN92"
+  },
+    {
+   "from": "PROJECT53",
+   "to": "FILTER93"
+  },
+    {
+   "from": "JOIN54",
+   "to": "PROJECT94"
+  },
+    {
+   "from": "JOIN54",
+   "to": "PROJECT95"
+  },
+    {
+   "from": "FILTER55",
+   "to": "TABLESCAN96"
+  },
+    {
+   "from": "PROJECT56",
+   "to": "FILTER97"
+  },
+    {
+   "from": "JOIN57",
+   "to": "PROJECT98"
+  },
+    {
+   "from": "JOIN57",
+   "to": "PROJECT99"
+  },
+    {
+   "from": "FILTER58",
+   "to": "TABLESCAN100"
+  },
+    {
+   "from": "PROJECT59",
+   "to": "FILTER101"
+  },
+    {
+   "from": "JOIN60",
+   "to": "PROJECT102"
+  },
+    {
+   "from": "JOIN60",
+   "to": "PROJECT103"
+  },
+    {
+   "from": "FILTER61",
+   "to": "TABLESCAN104"
+  },
+    {
+   "from": "PROJECT62",
+   "to": "FILTER105"
+  },
+    {
+   "from": "JOIN63",
+   "to": "PROJECT106"
+  },
+    {
+   "from": "JOIN63",
+   "to": "PROJECT107"
+  },
+    {
+   "from": "FILTER64",
+   "to": "TABLESCAN108"
+  },
+    {
+   "from": "PROJECT65",
+   "to": "FILTER109"
+  },
+    {
+   "from": "JOIN66",
+   "to": "PROJECT110"
+  },
+    {
+   "from": "JOIN66",
+   "to": "PROJECT111"
+  },
+    {
+   "from": "FILTER67",
+   "to": "TABLESCAN112"
+  },
+    {
+   "from": "PROJECT68",
+   "to": "FILTER113"
+  },
+    {
+   "from": "JOIN69",
+   "to": "PROJECT114"
+  },
+    {
+   "from": "JOIN69",
+   "to": "PROJECT115"
+  },
+    {
+   "from": "FILTER70",
+   "to": "TABLESCAN116"
+  },
+    {
+   "from": "PROJECT71",
+   "to": "FILTER117"
+  },
+    {
+   "from": "JOIN72",
+   "to": "PROJECT118"
+  },
+    {
+   "from": "JOIN72",
+   "to": "PROJECT119"
+  },
+    {
+   "from": "FILTER73",
+   "to": "TABLESCAN120"
+  },
+    {
+   "from": "PROJECT74",
+   "to": "FILTER121"
+  },
+    {
+   "from": "JOIN75",
+   "to": "PROJECT122"
+  },
+    {
+   "from": "JOIN75",
+   "to": "PROJECT123"
+  },
+    {
+   "from": "FILTER76",
+   "to": "TABLESCAN124"
+  },
+    {
+   "from": "FILTER77",
+   "to": "TABLESCAN125"
+  },
+    {
+   "from": "PROJECT78",
+   "to": "TABLESCAN126"
+  },
+    {
+   "from": "PROJECT79",
+   "to": "FILTER127"
+  },
+    {
+   "from": "FILTER81",
+   "to": "TABLESCAN128"
+  },
+    {
+   "from": "PROJECT82",
+   "to": "TABLESCAN129"
+  },
+    {
+   "from": "PROJECT83",
+   "to": "FILTER130"
+  },
+    {
+   "from": "FILTER85",
+   "to": "TABLESCAN131"
+  },
+    {
+   "from": "PROJECT86",
+   "to": "TABLESCAN132"
+  },
+    {
+   "from": "PROJECT87",
+   "to": "FILTER133"
+  },
+    {
+   "from": "FILTER89",
+   "to": "TABLESCAN134"
+  },
+    {
+   "from": "PROJECT90",
+   "to": "TABLESCAN135"
+  },
+    {
+   "from": "PROJECT91",
+   "to": "FILTER136"
+  },
+    {
+   "from": "FILTER93",
+   "to": "TABLESCAN137"
+  },
+    {
+   "from": "PROJECT94",
+   "to": "TABLESCAN138"
+  },
+    {
+   "from": "PROJECT95",
+   "to": "FILTER139"
+  },
+    {
+   "from": "FILTER97",
+   "to": "TABLESCAN140"
+  },
+    {
+   "from": "PROJECT98",
+   "to": "TABLESCAN141"
+  },
+    {
+   "from": "PROJECT99",
+   "to": "FILTER142"
+  },
+    {
+   "from": "FILTER101",
+   "to": "TABLESCAN143"
+  },
+    {
+   "from": "PROJECT102",
+   "to": "TABLESCAN144"
+  },
+    {
+   "from": "PROJECT103",
+   "to": "FILTER145"
+  },
+    {
+   "from": "FILTER105",
+   "to": "TABLESCAN146"
+  },
+    {
+   "from": "PROJECT106",
+   "to": "TABLESCAN147"
+  },
+    {
+   "from": "PROJECT107",
+   "to": "FILTER148"
+  },
+    {
+   "from": "FILTER109",
+   "to": "TABLESCAN149"
+  },
+    {
+   "from": "PROJECT110",
+   "to": "TABLESCAN150"
+  },
+    {
+   "from": "PROJECT111",
+   "to": "FILTER151"
+  },
+    {
+   "from": "FILTER113",
+   "to": "TABLESCAN152"
+  },
+    {
+   "from": "PROJECT114",
+   "to": "TABLESCAN153"
+  },
+    {
+   "from": "PROJECT115",
+   "to": "FILTER154"
+  },
+    {
+   "from": "FILTER117",
+   "to": "TABLESCAN155"
+  },
+    {
+   "from": "PROJECT118",
+   "to": "TABLESCAN156"
+  },
+    {
+   "from": "PROJECT119",
+   "to": "FILTER157"
+  },
+    {
+   "from": "FILTER121",
+   "to": "TABLESCAN158"
+  },
+    {
+   "from": "PROJECT122",
+   "to": "TABLESCAN159"
+  },
+    {
+   "from": "PROJECT123",
+   "to": "FILTER160"
+  },
+    {
+   "from": "FILTER127",
+   "to": "TABLESCAN161"
+  },
+    {
+   "from": "FILTER130",
+   "to": "TABLESCAN162"
+  },
+    {
+   "from": "FILTER133",
+   "to": "TABLESCAN163"
+  },
+    {
+   "from": "FILTER136",
+   "to": "TABLESCAN164"
+  },
+    {
+   "from": "FILTER139",
+   "to": "TABLESCAN165"
+  },
+    {
+   "from": "FILTER142",
+   "to": "TABLESCAN166"
+  },
+    {
+   "from": "FILTER145",
+   "to": "TABLESCAN167"
+  },
+    {
+   "from": "FILTER148",
+   "to": "TABLESCAN168"
+  },
+    {
+   "from": "FILTER151",
+   "to": "TABLESCAN169"
+  },
+    {
+   "from": "FILTER154",
+   "to": "TABLESCAN170"
+  },
+    {
+   "from": "FILTER157",
+   "to": "TABLESCAN171"
+  },
+    {
+   "from": "FILTER160",
+   "to": "TABLESCAN172"
+  }
+ ]
+}
+    </textarea>
+  </div>
+
+  <br/>
+  <div>
+    流程路径(不包括【开始】和【结束】)：<input type="text" id="txtFlowPath" placeholder="" value="3,4,6,5"  style="width: 300px;"/>
+    <button onclick="showFlowPath()">查看流程状态</button><input type="checkbox" value="已完成流程" id="chkIsCompleted" />流程已结束
+      <span style="color:red;font-size: 10px; margin-left: 20px;">3,4,6,5是步骤的id，最后一个步骤为"待处理"或"已完成"的步骤</span>
+  </div>
+  <!-- 图例 -->
+  <div style="padding:8px 5px 0 10px;">
+    <span style="display:inline-block; height:12px; width:12px; background:#4fba4f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">已完成步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#ff9001; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">待处理步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#7e7e7f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">未经过步骤</label>
+  </div>
+  <div style="width:100%; white-space:nowrap;">
+    <!--  显示面板 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:6620px">
+      <div id="myDisplayDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    var areaFlow = document.getElementById('mySavedModel');
+
+    // 流程图设计器
+    var  myDesigner= new FlowDesigner('myFlowDesignerDiv');
+    myDesigner.initToolbar('myPaletteDiv');// 初始化控件面板
+    myDesigner.displayFlow(areaFlow.value);// 在设计面板中显示流程图
+
+    // 流程图显示器
+    var myDisplay = new FlowDisplay('myDisplayDiv');
+    showFlowPath();
+    
+    function showFlowPath() {
+        var flowPath =  $.trim($('#txtFlowPath').val());
+        var isCompleted = $('#chkIsCompleted').is(':checked');
+        myDisplay.loadFlow(areaFlow.value);
+        myDisplay.animateFlowPath(flowPath, isCompleted);
+    }
+
+    /**
+     * 创建步骤
+     */
+    var doCreateStep = function () {
+        if(!myDesigner) return;
+
+        myDesigner.createStep();
+    };
+
+    /**
+     * 保存设计图中的数据
+     */
+    var saveDesigner = function(){
+     var errMsg = myDesigner.checkData();
+      if(errMsg){
+          layer.msg(errMsg);
+          return;
+      }
+      areaFlow.value = myDesigner.getFlowData();
+    };
+
+</script>
+</html>

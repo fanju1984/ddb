@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Query Plan Show</title>
+<meta name="description" content="" />
+<!-- Copyright 1998-2016 by Northwoods Software Corporation. -->
+<meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/go.js"></script>
+    <script src="js/flow-desinger.js"></script>
+    <script src="js/flow-display.js"></script>
+</head>
+<body>
+<div id="sample" style="width:80%;margin: 0 auto">
+  <div style="width:100%; white-space:nowrap;">
+    <!--  控件 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:110px">
+      <div id="myPaletteDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+
+    <!--  设计面板 -->
+    
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:10620px">
+      <div id="myFlowDesignerDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+  <div>
+    <div>
+      <button id="btnCreate" onclick="doCreateStep()">新建步骤</button>
+      <button id="btnSave" onclick="saveDesigner()">保存设计图</button>
+    </div>
+    <textarea id="mySavedModel" style="width:100%;height:300px">
+{
+ "class": "go.GraphLinksModel",
+ "modelData": {"position": "-100 -5"},
+ "nodeDataArray":  [
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "OutputNode1",
+   "loc": "540 60",
+   "stepType": 1,
+   "text": "name:OUTPUT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT2",
+   "loc": "540 200",
+   "stepType": 0,
+   "text": "columns:[orders.customer_id,orders.quantity]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER3",
+   "loc": "540 400",
+   "stepType": 0,
+   "text": "expression:(quantity < 8)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "UNION4",
+   "loc": "540 600",
+   "stepType": 0,
+   "text": "name:UNION\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT5",
+   "loc": "270 800",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT6",
+   "loc": "540 800",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT7",
+   "loc": "810 800",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT8",
+   "loc": "1080 800",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER9",
+   "loc": "270 1000",
+   "stepType": 0,
+   "text": "expression:((orders.quantity < 8) AND ((orders.customer_id < 307000) AND (orders.book_id < 215000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER10",
+   "loc": "540 1000",
+   "stepType": 0,
+   "text": "expression:((orders.quantity < 8) AND ((orders.customer_id < 307000) AND (orders.book_id >= 215000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER11",
+   "loc": "810 1000",
+   "stepType": 0,
+   "text": "expression:((orders.quantity < 8) AND ((orders.customer_id >= 307000) AND (orders.book_id < 215000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER12",
+   "loc": "1080 1000",
+   "stepType": 0,
+   "text": "expression:((orders.quantity < 8) AND ((orders.customer_id >= 307000) AND (orders.book_id >= 215000)))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN13",
+   "loc": "270 1200",
+   "stepType": 4,
+   "text": "schema:booktest\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN14",
+   "loc": "540 1200",
+   "stepType": 4,
+   "text": "schema:booktest\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN15",
+   "loc": "810 1200",
+   "stepType": 4,
+   "text": "schema:booktest\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN16",
+   "loc": "1080 1200",
+   "stepType": 4,
+   "text": "schema:booktest\nsite:pard3\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  }
+ ],
+ "linkDataArray":  [
+    {
+   "from": "OutputNode1",
+   "to": "PROJECT2"
+  },
+    {
+   "from": "PROJECT2",
+   "to": "FILTER3"
+  },
+    {
+   "from": "FILTER3",
+   "to": "UNION4"
+  },
+    {
+   "from": "UNION4",
+   "to": "PROJECT5"
+  },
+    {
+   "from": "UNION4",
+   "to": "PROJECT6"
+  },
+    {
+   "from": "UNION4",
+   "to": "PROJECT7"
+  },
+    {
+   "from": "UNION4",
+   "to": "PROJECT8"
+  },
+    {
+   "from": "PROJECT5",
+   "to": "FILTER9"
+  },
+    {
+   "from": "PROJECT6",
+   "to": "FILTER10"
+  },
+    {
+   "from": "PROJECT7",
+   "to": "FILTER11"
+  },
+    {
+   "from": "PROJECT8",
+   "to": "FILTER12"
+  },
+    {
+   "from": "FILTER9",
+   "to": "TABLESCAN13"
+  },
+    {
+   "from": "FILTER10",
+   "to": "TABLESCAN14"
+  },
+    {
+   "from": "FILTER11",
+   "to": "TABLESCAN15"
+  },
+    {
+   "from": "FILTER12",
+   "to": "TABLESCAN16"
+  }
+ ]
+}
+    </textarea>
+  </div>
+
+  <br/>
+  <div>
+    流程路径(不包括【开始】和【结束】)：<input type="text" id="txtFlowPath" placeholder="" value="3,4,6,5"  style="width: 300px;"/>
+    <button onclick="showFlowPath()">查看流程状态</button><input type="checkbox" value="已完成流程" id="chkIsCompleted" />流程已结束
+      <span style="color:red;font-size: 10px; margin-left: 20px;">3,4,6,5是步骤的id，最后一个步骤为"待处理"或"已完成"的步骤</span>
+  </div>
+  <!-- 图例 -->
+  <div style="padding:8px 5px 0 10px;">
+    <span style="display:inline-block; height:12px; width:12px; background:#4fba4f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">已完成步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#ff9001; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">待处理步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#7e7e7f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">未经过步骤</label>
+  </div>
+  <div style="width:100%; white-space:nowrap;">
+    <!--  显示面板 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:6620px">
+      <div id="myDisplayDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    var areaFlow = document.getElementById('mySavedModel');
+
+    // 流程图设计器
+    var  myDesigner= new FlowDesigner('myFlowDesignerDiv');
+    myDesigner.initToolbar('myPaletteDiv');// 初始化控件面板
+    myDesigner.displayFlow(areaFlow.value);// 在设计面板中显示流程图
+
+    // 流程图显示器
+    var myDisplay = new FlowDisplay('myDisplayDiv');
+    showFlowPath();
+    
+    function showFlowPath() {
+        var flowPath =  $.trim($('#txtFlowPath').val());
+        var isCompleted = $('#chkIsCompleted').is(':checked');
+        myDisplay.loadFlow(areaFlow.value);
+        myDisplay.animateFlowPath(flowPath, isCompleted);
+    }
+
+    /**
+     * 创建步骤
+     */
+    var doCreateStep = function () {
+        if(!myDesigner) return;
+
+        myDesigner.createStep();
+    };
+
+    /**
+     * 保存设计图中的数据
+     */
+    var saveDesigner = function(){
+     var errMsg = myDesigner.checkData();
+      if(errMsg){
+          layer.msg(errMsg);
+          return;
+      }
+      areaFlow.value = myDesigner.getFlowData();
+    };
+
+</script>
+</html>

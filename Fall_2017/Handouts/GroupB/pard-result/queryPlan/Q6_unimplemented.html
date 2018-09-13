@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Query Plan Show</title>
+<meta name="description" content="" />
+<!-- Copyright 1998-2016 by Northwoods Software Corporation. -->
+<meta charset="UTF-8">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/go.js"></script>
+    <script src="js/flow-desinger.js"></script>
+    <script src="js/flow-display.js"></script>
+</head>
+<body>
+<div id="sample" style="width:80%;margin: 0 auto">
+  <div style="width:100%; white-space:nowrap;">
+    <!--  控件 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:110px">
+      <div id="myPaletteDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+
+    <!--  设计面板 -->
+    
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:10620px">
+      <div id="myFlowDesignerDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+  <div>
+    <div>
+      <button id="btnCreate" onclick="doCreateStep()">新建步骤</button>
+      <button id="btnSave" onclick="saveDesigner()">保存设计图</button>
+    </div>
+    <textarea id="mySavedModel" style="width:100%;height:300px">
+{
+ "class": "go.GraphLinksModel",
+ "modelData": {"position": "-100 -5"},
+ "nodeDataArray":  [
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "OutputNode1",
+   "loc": "1080 60",
+   "stepType": 1,
+   "text": "name:OUTPUT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT2",
+   "loc": "1080 200",
+   "stepType": 0,
+   "text": "columns:[customer.name,orders.quantity]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER3",
+   "loc": "1080 400",
+   "stepType": 0,
+   "text": "expression:(customer.id = orders.customer_id)\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "UNION4",
+   "loc": "1080 600",
+   "stepType": 0,
+   "text": "name:UNION\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN5",
+   "loc": "270 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN6",
+   "loc": "810 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN7",
+   "loc": "1350 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN8",
+   "loc": "1890 800",
+   "stepType": 0,
+   "text": "name:JOIN\nexprList:[(customer.id = orders.customer_id)]\nmark:mark\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT9",
+   "loc": "270 1000",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN10",
+   "loc": "540 1000",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT11",
+   "loc": "810 1000",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN12",
+   "loc": "1080 1000",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT13",
+   "loc": "1350 1000",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN14",
+   "loc": "1620 1000",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT15",
+   "loc": "1890 1000",
+   "stepType": 0,
+   "text": "columns:[orders.quantity,orders.customer_id]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "JOIN16",
+   "loc": "2160 1000",
+   "stepType": 0,
+   "text": "joinColumn:[id]\nname:JOIN\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER17",
+   "loc": "270 1200",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT18",
+   "loc": "540 1200",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER19",
+   "loc": "810 1200",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id < 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT20",
+   "loc": "1080 1200",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER21",
+   "loc": "1350 1200",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id < 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT22",
+   "loc": "1620 1200",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "FILTER23",
+   "loc": "1890 1200",
+   "stepType": 0,
+   "text": "expression:((orders.customer_id >= 307000) AND (orders.book_id >= 215000))\nname:FILTER\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "PROJECT24",
+   "loc": "2160 1200",
+   "stepType": 0,
+   "text": "columns:[customer.id,customer.name]\nname:PROJECT\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN25",
+   "loc": "270 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN26",
+   "loc": "540 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN27",
+   "loc": "810 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard1\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN28",
+   "loc": "1080 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN29",
+   "loc": "1350 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard2\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN30",
+   "loc": "1620 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN31",
+   "loc": "1890 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard3\nname:TABLESCAN\nalias:null\ntable:orders\n"
+  },
+    {
+   "figure": "Rectangle",
+   "fill": "#4fba4f",
+   "key": "TABLESCAN32",
+   "loc": "2160 1400",
+   "stepType": 4,
+   "text": "schema:book\nsite:pard0\nname:TABLESCAN\nalias:null\ntable:customer\n"
+  }
+ ],
+ "linkDataArray":  [
+    {
+   "from": "OutputNode1",
+   "to": "PROJECT2"
+  },
+    {
+   "from": "PROJECT2",
+   "to": "FILTER3"
+  },
+    {
+   "from": "FILTER3",
+   "to": "UNION4"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN5"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN6"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN7"
+  },
+    {
+   "from": "UNION4",
+   "to": "JOIN8"
+  },
+    {
+   "from": "JOIN5",
+   "to": "PROJECT9"
+  },
+    {
+   "from": "JOIN5",
+   "to": "JOIN10"
+  },
+    {
+   "from": "JOIN6",
+   "to": "PROJECT11"
+  },
+    {
+   "from": "JOIN6",
+   "to": "JOIN12"
+  },
+    {
+   "from": "JOIN7",
+   "to": "PROJECT13"
+  },
+    {
+   "from": "JOIN7",
+   "to": "JOIN14"
+  },
+    {
+   "from": "JOIN8",
+   "to": "PROJECT15"
+  },
+    {
+   "from": "JOIN8",
+   "to": "JOIN16"
+  },
+    {
+   "from": "PROJECT9",
+   "to": "FILTER17"
+  },
+    {
+   "from": "JOIN10",
+   "to": "PROJECT18"
+  },
+    {
+   "from": "PROJECT11",
+   "to": "FILTER19"
+  },
+    {
+   "from": "JOIN12",
+   "to": "PROJECT20"
+  },
+    {
+   "from": "PROJECT13",
+   "to": "FILTER21"
+  },
+    {
+   "from": "JOIN14",
+   "to": "PROJECT22"
+  },
+    {
+   "from": "PROJECT15",
+   "to": "FILTER23"
+  },
+    {
+   "from": "JOIN16",
+   "to": "PROJECT24"
+  },
+    {
+   "from": "FILTER17",
+   "to": "TABLESCAN25"
+  },
+    {
+   "from": "PROJECT18",
+   "to": "TABLESCAN26"
+  },
+    {
+   "from": "FILTER19",
+   "to": "TABLESCAN27"
+  },
+    {
+   "from": "PROJECT20",
+   "to": "TABLESCAN28"
+  },
+    {
+   "from": "FILTER21",
+   "to": "TABLESCAN29"
+  },
+    {
+   "from": "PROJECT22",
+   "to": "TABLESCAN30"
+  },
+    {
+   "from": "FILTER23",
+   "to": "TABLESCAN31"
+  },
+    {
+   "from": "PROJECT24",
+   "to": "TABLESCAN32"
+  }
+ ]
+}
+    </textarea>
+  </div>
+
+  <br/>
+  <div>
+    流程路径(不包括【开始】和【结束】)：<input type="text" id="txtFlowPath" placeholder="" value="3,4,6,5"  style="width: 300px;"/>
+    <button onclick="showFlowPath()">查看流程状态</button><input type="checkbox" value="已完成流程" id="chkIsCompleted" />流程已结束
+      <span style="color:red;font-size: 10px; margin-left: 20px;">3,4,6,5是步骤的id，最后一个步骤为"待处理"或"已完成"的步骤</span>
+  </div>
+  <!-- 图例 -->
+  <div style="padding:8px 5px 0 10px;">
+    <span style="display:inline-block; height:12px; width:12px; background:#4fba4f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">已完成步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#ff9001; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">待处理步骤</label>
+    <span style="display:inline-block; height:12px; width:12px; background:#7e7e7f; margin-left:6px; vertical-align:middle;"></span>
+    <label style="vertical-align:middle;">未经过步骤</label>
+  </div>
+  <div style="width:100%; white-space:nowrap;">
+    <!--  显示面板 -->
+    <span style="display: inline-block; vertical-align: top; padding: 5px; width:6620px">
+      <div id="myDisplayDiv" style="border: solid 1px black; height: 1820px"></div>
+    </span>
+  </div>
+
+</div>
+</body>
+<script type="text/javascript">
+    var areaFlow = document.getElementById('mySavedModel');
+
+    // 流程图设计器
+    var  myDesigner= new FlowDesigner('myFlowDesignerDiv');
+    myDesigner.initToolbar('myPaletteDiv');// 初始化控件面板
+    myDesigner.displayFlow(areaFlow.value);// 在设计面板中显示流程图
+
+    // 流程图显示器
+    var myDisplay = new FlowDisplay('myDisplayDiv');
+    showFlowPath();
+    
+    function showFlowPath() {
+        var flowPath =  $.trim($('#txtFlowPath').val());
+        var isCompleted = $('#chkIsCompleted').is(':checked');
+        myDisplay.loadFlow(areaFlow.value);
+        myDisplay.animateFlowPath(flowPath, isCompleted);
+    }
+
+    /**
+     * 创建步骤
+     */
+    var doCreateStep = function () {
+        if(!myDesigner) return;
+
+        myDesigner.createStep();
+    };
+
+    /**
+     * 保存设计图中的数据
+     */
+    var saveDesigner = function(){
+     var errMsg = myDesigner.checkData();
+      if(errMsg){
+          layer.msg(errMsg);
+          return;
+      }
+      areaFlow.value = myDesigner.getFlowData();
+    };
+
+</script>
+</html>
