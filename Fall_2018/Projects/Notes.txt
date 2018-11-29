@@ -1,0 +1,33 @@
+1. DDBMS Midterm Report: Chai Mingke, Hong Yinhao, Shen Yunlong
+1) Simple, Embedded, Flexible configuration
+2) Server + Client
+3) Data Manager, Query Executor的分隔, Etcd的链接，PG的数据库，网络通信：RPC
+4）Language: Golang, IDE: Goland
+5) Etcd is written in Golang, so it can be embedded in GoLang
+6) Proocol buffer & gRPC
+7) Configuration file languge: TOML
+
+1) Query Parser: Contralized query, Analysis Part (Comment: 这部分可以简略)
+2) Query Rewrite: Detect semantic incorrect (Comment: 这部分可以简略)； Rewrite tree
+3) Reduction: Horizontal Fragmentation (Union); Vertical Fragmentation (Join)
+4) Optimization: Semi-join
+
+1) Data Manager: DDL (create, drop, insert, delete)
+2) Fragmentation, Horizontal & Vertical
+3) meta-data
+
+2. Lin Yihui, Chen Ming, Zeng Xiang, Wang Jiayue
+1) SQL Engine, Data Manager (Comment: sites -- result--> client)
+2) C++, CILION, MySQL, Git
+3) SQL Parser: Flex+Bison, syntax (Comment: Example?); Reject type incorrect
+4) Query Rewriting: 
+5) SQL Translator (What?)
+6) Optimizer: Cost model?
+7) User Information (Comment: Useful???)
+8) Etcd: Etcd Raft, Etcd Wal, Etcd Storage
+9) Etcd watch? Etcd Raft
+10) How to use Etcd: libcurl library in C++
+11) RPC: rpclib, grpc
+12) C++ Connector: Local Executor
+
+Comment: Dependency Management? How to build?
