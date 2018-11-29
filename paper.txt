@@ -1,0 +1,18 @@
+1.Xiangyao Yu, George Bezerra, Andrew Pavlo, Srinivas Devadas, Michael Stonebraker:
+  Staring into the Abyss: An Evaluation of Concurrency Control with One Thousand Cores. PVLDB 8(3): 209-220 (2014)
+2.Shuai Mu, Yang Cui, Yang Zhang, Wyatt Lloyd, Jinyang Li:
+  Extracting More Concurrency from Distributed Transactions. OSDI 2014: 479-494
+3.Goetz Graefe, Felix Halim, Stratos Idreos, Harumi A. Kuno, Stefan Manegold:
+  Concurrency Control for Adaptive Indexing. PVLDB 5(7): 656-667 (2012)
+4.Stacy Patterson, Aaron J. Elmore, Faisal Nawab, Divyakant Agrawal, Amr El Abbadi:
+  Serializability, not Serial: Concurrency Control and Availability in Multi-Datacenter Datastores. PVLDB 5(11): 1459-1470 (2012)
+5.Iraklis Psaroudakis, Manos Athanassoulis, Matthaios Olma, Anastasia Ailamaki:
+  Reactive and proactive sharing across concurrent analytical queries. SIGMOD Conference 2014: 889-892
+6.Philip A. Bernstein, Colin W. Reid, Ming Wu, Xinhao Yuan:
+  Optimistic Concurrency Control by Melding Trees. PVLDB 4(11): 944-955 (2011)
+7.Per-Åke Larson, Spyros Blanas, Cristian Diaconu, Craig Freedman, Jignesh M. Patel, Mike Zwilling:
+  High-Performance Concurrency Control Mechanisms for Main-Memory Databases. PVLDB 5(4): 298-309 (2011)
+8.Philip A. Bernstein, Colin W. Reid, Ming Wu, Xinhao Yuan:
+Optimistic Concurrency Control by Melding Trees. PVLDB 4(11): 944-955 (2011)
+9.Per-Åke Larson, Spyros Blanas, Cristian Diaconu, Craig Freedman, Jignesh M. Patel, Mike Zwilling:
+High-Performance Concurrency Control Mechanisms for Main-Memory Databases. PVLDB 5(4): 298-309 (2011)
