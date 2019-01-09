@@ -1,3 +1,4 @@
+//需要将所要执行的操作绑定在 RPC 的服务中，其中包括 execute，query 等
 #include "rpc/client.h"
 #include <iostream>
 #include <string>
