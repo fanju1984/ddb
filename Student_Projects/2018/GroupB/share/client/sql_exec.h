@@ -1,3 +1,4 @@
+//定义站点、Frag Parser将分片的语句解析之后，调用etcd的接口，同样也将分片的信息上传至 etcd 中。还有就是create/delete/insert的执行
 #include <string>
 #include <iostream>
 #include <vector>
