@@ -1,3 +1,4 @@
+//元数据管理，提供frag table site的存取接口
 #ifndef _DDB_METADATA_H_
 #define _DDB_METADATA_H_
 #include <curl/curl.h>  
