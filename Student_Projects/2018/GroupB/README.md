@@ -1,4 +1,8 @@
 一、分布式数据库环境部署
+    
+
+
+
     首先sudo apt-get update
     1.安装gcc
     sudo apt-get install gcc
