@@ -1,3 +1,4 @@
+//解析sql语句
 #ifndef _DDB_PARSER_H_
 #define _DDB_PARSER_H_
 #include <string>
