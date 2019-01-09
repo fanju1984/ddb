@@ -1,4 +1,8 @@
 一、分布式数据库环境部署
+    
+
+
+
     首先sudo apt-get update
     1.安装gcc
     sudo apt-get install gcc
@@ -174,6 +178,7 @@
     create database db4;
 二、运行环境
 我们的分布式数据库采用 C++语言开发，运行在 Ubuntu 18.04 上，底层的 数据库使用 MySQL5.7，并且使用了 Etcd 管理元数据信息。采用了 P2P 的架构， 每个 Server 都可以部署在任意的机器上，并且每一个节点都可以作为客户端程 序进行访问。我们的实验环境使用了三台机器，在 PC1，PC2 上分别部署了一个 站点，在 PC3 上使用不同的端口部署了多个站点。
+<<<<<<< HEAD
 三、代码结构说明
 
     metadata.cpp 是负责元数据管理，主要提供存储etcd功能；
@@ -184,3 +189,5 @@
     parser.cpp 解析sql语句
     local_sql.cpp 本地sql语句封装
     main.cpp 主函数
+=======
+>>>>>>> d543a64836ddc792ab193bf038206334665b0031
