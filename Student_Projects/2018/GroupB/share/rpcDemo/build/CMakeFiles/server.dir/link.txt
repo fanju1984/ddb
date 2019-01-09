@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -pthread    CMakeFiles/server.dir/server.cpp.o  -o server /home/tommenx/share/rpclib/build/librpc.a 

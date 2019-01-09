@@ -1,0 +1,3 @@
+/home/tommenx/share/rpcDemo/build/CMakeFiles/edit_cache.dir
+/home/tommenx/share/rpcDemo/build/CMakeFiles/rebuild_cache.dir
+/home/tommenx/share/rpcDemo/build/CMakeFiles/server.dir

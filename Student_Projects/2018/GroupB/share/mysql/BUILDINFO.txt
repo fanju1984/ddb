@@ -1,0 +1,11 @@
+Information about the build environment:
+
+OS information : Linux-4.4.0-127-generic
+C   compiler   : GNU 5.4.0
+C++ compiler   : GNU 5.4.0
+GLIBC version   : (Ubuntu GLIBC 2.23-0ubuntu10) 2.23
+
+
+Legacy connector information:
+
+MySQL version  : 8.0.13

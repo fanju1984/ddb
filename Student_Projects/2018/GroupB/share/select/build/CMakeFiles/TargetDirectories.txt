@@ -1,0 +1,3 @@
+/home/tommenx/share/select/build/CMakeFiles/edit_cache.dir
+/home/tommenx/share/select/build/CMakeFiles/rebuild_cache.dir
+/home/tommenx/share/select/build/CMakeFiles/select.dir

@@ -1,0 +1,22 @@
+[create table]
+create table Student (id int key, name char(25), sex char(1), age int, degree int)
+create table Teacher (id int key, name char(25), title int)
+create table Course (id int key, name char(80), location char(8), credit_hour int, teacher_id int)
+create table Exam (student_id int, course_id int, mark int)
+[fragment]
+frag -hor Student id < '1050000' db1 * id >= '1050000' and id < '1100000' db2 * id >= '1100000'  db3
+frag -hor Teacher id < '2010000' and title <> 3 db1 *  id < '2010000' and title = 3 db2 * id >= '2010000' and title <> 3 db3 * id >= '2010000' and title = 3
+frag -ver Course (id,name) db1 * Course(id,location,credit_hour,tecaher_id) db2
+frag -hor Exam student_id < 1070000 and course_id < 301200 db1 * student id < 1070000 and course_id >= 301200 db2 * student_id >= 1070000 and course_id < 301200 db3 * student_id >= 107000 and course_id >= 301200
+[insert & delete]
+insert into Student values (1000001, 'xiao ming', 'M', 20, 1)
+insert into Teacher values (2900010, 'Santa Claus', 2)
+insert into Teacher values (2000001, 'St. Nicholas', 1)
+insert into Course values (3900001, 'Defence Against Dark Arts', 'CB-3', 4, 200001)
+insert into Exam values (1900001, 3900001, 96)
+
+delete from Teacher where title=1
+delete from Teacher where id>=2900010 and title=2
+delete from Student where id=1000001
+delete from Course where location='CB-3'
+delete from Exam  
