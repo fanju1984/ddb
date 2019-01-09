@@ -1,5 +1,6 @@
 //
 // Created by tommenx on 2018/10/27.
+//封装本地sql语句
 //
 #include <string>
 #include <vector>
