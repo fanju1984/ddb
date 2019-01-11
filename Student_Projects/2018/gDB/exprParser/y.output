@@ -1,0 +1,132 @@
+
+state 0
+	$accept: .main $end 
+
+	IDENT  shift 4
+	.  error
+
+	exprs  goto 2
+	expr  goto 3
+	main  goto 1
+
+state 1
+	$accept:  main.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	main:  exprs.    (1)
+	exprs:  exprs.AND expr 
+
+	AND  shift 5
+	.  reduce 1 (src line 26)
+
+
+state 3
+	exprs:  expr.    (2)
+
+	.  reduce 2 (src line 31)
+
+
+state 4
+	expr:  IDENT.a_op NUMBER 
+	expr:  IDENT.a_op STRING 
+
+	'>'  shift 7
+	'='  shift 8
+	'<'  shift 9
+	.  error
+
+	a_op  goto 6
+
+state 5
+	exprs:  exprs AND.expr 
+
+	IDENT  shift 4
+	.  error
+
+	expr  goto 10
+
+state 6
+	expr:  IDENT a_op.NUMBER 
+	expr:  IDENT a_op.STRING 
+
+	NUMBER  shift 11
+	STRING  shift 12
+	.  error
+
+
+state 7
+	a_op:  '>'.    (6)
+	a_op:  '>'.'=' 
+
+	'='  shift 13
+	.  reduce 6 (src line 76)
+
+
+state 8
+	a_op:  '='.    (7)
+
+	.  reduce 7 (src line 77)
+
+
+state 9
+	a_op:  '<'.    (8)
+	a_op:  '<'.'=' 
+	a_op:  '<'.'>' 
+
+	'>'  shift 15
+	'='  shift 14
+	.  reduce 8 (src line 78)
+
+
+state 10
+	exprs:  exprs AND expr.    (3)
+
+	.  reduce 3 (src line 35)
+
+
+state 11
+	expr:  IDENT a_op NUMBER.    (4)
+
+	.  reduce 4 (src line 40)
+
+
+state 12
+	expr:  IDENT a_op STRING.    (5)
+
+	.  reduce 5 (src line 58)
+
+
+state 13
+	a_op:  '>' '='.    (9)
+
+	.  reduce 9 (src line 79)
+
+
+state 14
+	a_op:  '<' '='.    (10)
+
+	.  reduce 10 (src line 80)
+
+
+state 15
+	a_op:  '<' '>'.    (11)
+
+	.  reduce 11 (src line 81)
+
+
+10 terminals, 5 nonterminals
+12 grammar rules, 16/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+54 working sets used
+memory: parser 4/120000
+0 extra closures
+11 shift entries, 1 exceptions
+5 goto entries
+0 entries saved by goto default
+Optimizer space used: output 15/120000
+15 table entries, 0 zero
+maximum spread: 10, maximum offset: 9
