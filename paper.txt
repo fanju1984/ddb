@@ -16,3 +16,21 @@
 Optimistic Concurrency Control by Melding Trees. PVLDB 4(11): 944-955 (2011)
 9.Per-Åke Larson, Spyros Blanas, Cristian Diaconu, Craig Freedman, Jignesh M. Patel, Mike Zwilling:
 High-Performance Concurrency Control Mechanisms for Main-Memory Databases. PVLDB 5(4): 298-309 (2011)
+
+2015~2018
+1. Xiangyao Yu, Yu Xia, Andrew Pavlo, Daniel Sánchez, Larry Rudolph, Srinivas Devadas:
+  Sundial: Harmonizing Concurrency Control and Caching in a Distributed OLTP Database Management System. PVLDB 11(10): 1289-1302 (2018)
+2. Qian Lin, Gang Chen, Meihui Zhang:
+  On the Design of Adaptive and Speculative Concurrency Control in Distributed Databases. ICDE 2018: 1376-1379
+3. Chunzhi Su, Natacha Crooks, Cong Ding, Lorenzo Alvisi, Chao Xie:
+  Bringing Modular Concurrency Control to the Next Level. SIGMOD Conference 2017: 283-297
+4. Xiangyao Yu, Andrew Pavlo, Daniel Sánchez, Srinivas Devadas:
+  TicToc: Time Traveling Optimistic Concurrency Control. SIGMOD Conference 2016: 1629-1642
+5. Yuan Yuan, Kaibo Wang, Rubao Lee, Xiaoning Ding, Jing Xing, Spyros Blanas, Xiaodong Zhang:
+  BCC: Reducing False Aborts in Optimistic Concurrency Control with Low Cost for In-Memory Databases. PVLDB 9(6): 504-515 (2016)
+6. Thomas Neumann, Tobias Mühlbauer, Alfons Kemper:
+  Fast Serializable Multi-Version Concurrency Control for Main-Memory Database Systems. SIGMOD Conference 2015: 677-689
+7. Philip A. Bernstein, Sudipto Das, Bailu Ding, Markus Pilman:
+  Optimizing Optimistic Concurrency Control for Tree-Structured, Log-Structured Databases. SIGMOD Conference 2015: 1295-1309
+8. Jose M. Faleiro, Daniel J. Abadi:
+  Rethinking serializable multiversion concurrency control. PVLDB 8(11): 1190-1201 (2015)
