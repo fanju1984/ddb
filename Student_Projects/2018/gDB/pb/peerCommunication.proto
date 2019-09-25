@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+service PeerCommunication {
+    rpc Execute (Query) returns (State) {}
+    rpc Load (Data) returns (ACK) {}
+    rpc Select (SelectQuery) returns (ACK) {}
+    rpc SendResult (Result) returns (ACK) {}
+    rpc RequestNext (FinishMessage) returns (NextStep) {}
+    rpc AddRPCClient (NewClient) returns (ACK) {}
+}
+
+message SelectQuery {
+    string query = 1;
+    string toSite = 2;
+}
+
+message Query {
+    string query = 1;
+}
+
+message Data {
+    string tableName = 1;
+    string data = 2;
+}
+
+message State {
+    int64 effectedLine = 1;
+    string error = 2;
+}
+
+message ACK {
+    string ack = 1;
+}
+
+message Result {
+    string result = 1;
+}
+
+message FinishMessage {
+    string thisTurn = 1;
+}
+
+message NextStep {
+    string plan = 1;
+}
+
+message NewClient {
+    string name = 1;
+    string url = 2;
+}

@@ -1,0 +1,905 @@
+/*
+** yacc的输出文件，无实际用途，可删。
+*/
+state 0
+	$accept: .main $end 
+
+	LEX_ERROR  shift 3
+	CREATE  shift 11
+	DELETE  shift 13
+	INSERT  shift 12
+	LOAD  shift 17
+	FRAGMENT  shift 18
+	ALLOCATE  shift 16
+	.  error
+
+	statement  goto 2
+	create_db  goto 4
+	create_table  goto 5
+	fragment_table  goto 8
+	h_fragment_table  goto 14
+	v_fragment_table  goto 15
+	allocate_frag  goto 9
+	insert_table  goto 6
+	delete_table  goto 7
+	load_stmt  goto 10
+	main  goto 1
+
+state 1
+	$accept:  main.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	main:  statement.    (1)
+
+	.  reduce 1 (src line 122)
+
+
+state 3
+	main:  LEX_ERROR.    (2)
+
+	.  reduce 2 (src line 126)
+
+
+state 4
+	statement:  create_db.';' 
+
+	';'  shift 19
+	.  error
+
+
+state 5
+	statement:  create_table.';' 
+
+	';'  shift 20
+	.  error
+
+
+state 6
+	statement:  insert_table.';' 
+
+	';'  shift 21
+	.  error
+
+
+state 7
+	statement:  delete_table.';' 
+
+	';'  shift 22
+	.  error
+
+
+state 8
+	statement:  fragment_table.';' 
+
+	';'  shift 23
+	.  error
+
+
+state 9
+	statement:  allocate_frag.';' 
+
+	';'  shift 24
+	.  error
+
+
+state 10
+	statement:  load_stmt.';' 
+
+	';'  shift 25
+	.  error
+
+
+state 11
+	create_db:  CREATE.DATABASE db_name 
+	create_table:  CREATE.TABLE table_name '(' column_def_list ')' 
+
+	DATABASE  shift 26
+	TABLE  shift 27
+	.  error
+
+
+state 12
+	insert_table:  INSERT.INTO table_name VALUES '(' insert_values ')' 
+
+	INTO  shift 28
+	.  error
+
+
+state 13
+	delete_table:  DELETE.FROM table_name 
+	delete_table:  DELETE.FROM table_name WHERE delete_conditions 
+
+	FROM  shift 29
+	.  error
+
+
+state 14
+	fragment_table:  h_fragment_table.    (29)
+
+	.  reduce 29 (src line 248)
+
+
+state 15
+	fragment_table:  v_fragment_table.    (30)
+
+	.  reduce 30 (src line 253)
+
+
+state 16
+	allocate_frag:  ALLOCATE.NAMEWITHDOT TO IDENT 
+
+	NAMEWITHDOT  shift 30
+	.  error
+
+
+state 17
+	load_stmt:  LOAD.table_name FROM STRING 
+
+	IDENT  shift 32
+	.  error
+
+	table_name  goto 31
+
+state 18
+	h_fragment_table:  FRAGMENT.table_name HORIZONTALLY INTO h_fragment_list 
+	v_fragment_table:  FRAGMENT.table_name VERTICALLY INTO v_fragment_list 
+
+	IDENT  shift 32
+	.  error
+
+	table_name  goto 33
+
+state 19
+	statement:  create_db ';'.    (3)
+
+	.  reduce 3 (src line 127)
+
+
+state 20
+	statement:  create_table ';'.    (4)
+
+	.  reduce 4 (src line 133)
+
+
+state 21
+	statement:  insert_table ';'.    (5)
+
+	.  reduce 5 (src line 137)
+
+
+state 22
+	statement:  delete_table ';'.    (6)
+
+	.  reduce 6 (src line 141)
+
+
+state 23
+	statement:  fragment_table ';'.    (7)
+
+	.  reduce 7 (src line 145)
+
+
+state 24
+	statement:  allocate_frag ';'.    (8)
+
+	.  reduce 8 (src line 149)
+
+
+state 25
+	statement:  load_stmt ';'.    (9)
+
+	.  reduce 9 (src line 153)
+
+
+state 26
+	create_db:  CREATE DATABASE.db_name 
+
+	IDENT  shift 35
+	.  error
+
+	db_name  goto 34
+
+state 27
+	create_table:  CREATE TABLE.table_name '(' column_def_list ')' 
+
+	IDENT  shift 32
+	.  error
+
+	table_name  goto 36
+
+state 28
+	insert_table:  INSERT INTO.table_name VALUES '(' insert_values ')' 
+
+	IDENT  shift 32
+	.  error
+
+	table_name  goto 37
+
+state 29
+	delete_table:  DELETE FROM.table_name 
+	delete_table:  DELETE FROM.table_name WHERE delete_conditions 
+
+	IDENT  shift 32
+	.  error
+
+	table_name  goto 38
+
+state 30
+	allocate_frag:  ALLOCATE NAMEWITHDOT.TO IDENT 
+
+	TO  shift 39
+	.  error
+
+
+state 31
+	load_stmt:  LOAD table_name.FROM STRING 
+
+	FROM  shift 40
+	.  error
+
+
+state 32
+	table_name:  IDENT.    (13)
+
+	.  reduce 13 (src line 173)
+
+
+state 33
+	h_fragment_table:  FRAGMENT table_name.HORIZONTALLY INTO h_fragment_list 
+	v_fragment_table:  FRAGMENT table_name.VERTICALLY INTO v_fragment_list 
+
+	HORIZONTALLY  shift 41
+	VERTICALLY  shift 42
+	.  error
+
+
+state 34
+	create_db:  CREATE DATABASE db_name.    (10)
+
+	.  reduce 10 (src line 158)
+
+
+state 35
+	db_name:  IDENT.    (11)
+
+	.  reduce 11 (src line 163)
+
+
+state 36
+	create_table:  CREATE TABLE table_name.'(' column_def_list ')' 
+
+	'('  shift 43
+	.  error
+
+
+state 37
+	insert_table:  INSERT INTO table_name.VALUES '(' insert_values ')' 
+
+	VALUES  shift 44
+	.  error
+
+
+state 38
+	delete_table:  DELETE FROM table_name.    (58)
+	delete_table:  DELETE FROM table_name.WHERE delete_conditions 
+
+	WHERE  shift 45
+	.  reduce 58 (src line 369)
+
+
+state 39
+	allocate_frag:  ALLOCATE NAMEWITHDOT TO.IDENT 
+
+	IDENT  shift 46
+	.  error
+
+
+state 40
+	load_stmt:  LOAD table_name FROM.STRING 
+
+	STRING  shift 47
+	.  error
+
+
+state 41
+	h_fragment_table:  FRAGMENT table_name HORIZONTALLY.INTO h_fragment_list 
+
+	INTO  shift 48
+	.  error
+
+
+state 42
+	v_fragment_table:  FRAGMENT table_name VERTICALLY.INTO v_fragment_list 
+
+	INTO  shift 49
+	.  error
+
+
+state 43
+	create_table:  CREATE TABLE table_name '('.column_def_list ')' 
+
+	IDENT  shift 53
+	.  error
+
+	column_name  goto 52
+	column_def  goto 51
+	column_def_list  goto 50
+
+state 44
+	insert_table:  INSERT INTO table_name VALUES.'(' insert_values ')' 
+
+	'('  shift 54
+	.  error
+
+
+state 45
+	delete_table:  DELETE FROM table_name WHERE.delete_conditions 
+
+	IDENT  shift 57
+	.  error
+
+	delete_conditions  goto 55
+	delete_condition  goto 56
+
+state 46
+	allocate_frag:  ALLOCATE NAMEWITHDOT TO IDENT.    (52)
+
+	.  reduce 52 (src line 342)
+
+
+state 47
+	load_stmt:  LOAD table_name FROM STRING.    (66)
+
+	.  reduce 66 (src line 410)
+
+
+state 48
+	h_fragment_table:  FRAGMENT table_name HORIZONTALLY INTO.h_fragment_list 
+
+	IDENT  shift 61
+	.  error
+
+	h_fragment_list  goto 58
+	h_fragment  goto 59
+	h_fragment_limit  goto 60
+
+state 49
+	v_fragment_table:  FRAGMENT table_name VERTICALLY INTO.v_fragment_list 
+
+	'('  shift 64
+	.  error
+
+	v_fragment_list  goto 62
+	v_fragment  goto 63
+
+state 50
+	create_table:  CREATE TABLE table_name '(' column_def_list.')' 
+	column_def_list:  column_def_list.',' column_def 
+
+	')'  shift 65
+	','  shift 66
+	.  error
+
+
+state 51
+	column_def_list:  column_def.    (14)
+
+	.  reduce 14 (src line 178)
+
+
+state 52
+	column_def:  column_name.column_type null_opt column_key_opt 
+
+	INT  shift 68
+	FLOAT  shift 69
+	DOUBLE  shift 70
+	CHAR  shift 72
+	.  error
+
+	column_type  goto 67
+	char_type  goto 71
+
+state 53
+	column_name:  IDENT.    (17)
+
+	.  reduce 17 (src line 193)
+
+
+state 54
+	insert_table:  INSERT INTO table_name VALUES '('.insert_values ')' 
+
+	NUMBER  shift 75
+	STRING  shift 76
+	.  error
+
+	insert_values  goto 73
+	insert_value  goto 74
+
+state 55
+	delete_table:  DELETE FROM table_name WHERE delete_conditions.    (59)
+	delete_conditions:  delete_conditions.d_l_op delete_condition 
+
+	OR  shift 79
+	AND  shift 78
+	.  reduce 59 (src line 374)
+
+	d_l_op  goto 77
+
+state 56
+	delete_conditions:  delete_condition.    (60)
+
+	.  reduce 60 (src line 379)
+
+
+state 57
+	delete_condition:  IDENT.a_op NUMBER 
+	delete_condition:  IDENT.a_op STRING 
+
+	'>'  shift 81
+	'='  shift 82
+	'<'  shift 83
+	.  error
+
+	a_op  goto 80
+
+state 58
+	h_fragment_table:  FRAGMENT table_name HORIZONTALLY INTO h_fragment_list.    (31)
+	h_fragment_list:  h_fragment_list.',' h_fragment 
+
+	','  shift 84
+	.  reduce 31 (src line 258)
+
+
+state 59
+	h_fragment_list:  h_fragment.    (33)
+	h_fragment:  h_fragment.fragment_l_op h_fragment_limit 
+
+	OR  shift 87
+	AND  shift 86
+	'&'  shift 88
+	.  reduce 33 (src line 268)
+
+	fragment_l_op  goto 85
+
+state 60
+	h_fragment:  h_fragment_limit.    (35)
+
+	.  reduce 35 (src line 281)
+
+
+state 61
+	h_fragment_limit:  IDENT.a_op NUMBER 
+
+	'>'  shift 81
+	'='  shift 82
+	'<'  shift 83
+	.  error
+
+	a_op  goto 89
+
+state 62
+	v_fragment_table:  FRAGMENT table_name VERTICALLY INTO v_fragment_list.    (32)
+	v_fragment_list:  v_fragment_list.',' v_fragment 
+
+	','  shift 90
+	.  reduce 32 (src line 263)
+
+
+state 63
+	v_fragment_list:  v_fragment.    (47)
+
+	.  reduce 47 (src line 318)
+
+
+state 64
+	v_fragment:  '('.v_frag_columns ')' 
+
+	IDENT  shift 53
+	.  error
+
+	column_name  goto 92
+	v_frag_columns  goto 91
+
+state 65
+	create_table:  CREATE TABLE table_name '(' column_def_list ')'.    (12)
+
+	.  reduce 12 (src line 168)
+
+
+state 66
+	column_def_list:  column_def_list ','.column_def 
+
+	IDENT  shift 53
+	.  error
+
+	column_name  goto 52
+	column_def  goto 93
+
+state 67
+	column_def:  column_name column_type.null_opt column_key_opt 
+	null_opt: .    (24)
+
+	NOT  shift 95
+	.  reduce 24 (src line 226)
+
+	null_opt  goto 94
+
+state 68
+	column_type:  INT.    (18)
+
+	.  reduce 18 (src line 198)
+
+
+state 69
+	column_type:  FLOAT.    (19)
+
+	.  reduce 19 (src line 202)
+
+
+state 70
+	column_type:  DOUBLE.    (20)
+
+	.  reduce 20 (src line 206)
+
+
+state 71
+	column_type:  char_type.    (21)
+
+	.  reduce 21 (src line 211)
+
+
+state 72
+	char_type:  CHAR.length_opt 
+
+	'('  shift 97
+	.  error
+
+	length_opt  goto 96
+
+state 73
+	insert_table:  INSERT INTO table_name VALUES '(' insert_values.')' 
+	insert_values:  insert_values.',' insert_value 
+
+	')'  shift 98
+	','  shift 99
+	.  error
+
+
+state 74
+	insert_values:  insert_value.    (54)
+
+	.  reduce 54 (src line 351)
+
+
+state 75
+	insert_value:  NUMBER.    (56)
+
+	.  reduce 56 (src line 360)
+
+
+state 76
+	insert_value:  STRING.    (57)
+
+	.  reduce 57 (src line 364)
+
+
+state 77
+	delete_conditions:  delete_conditions d_l_op.delete_condition 
+
+	IDENT  shift 57
+	.  error
+
+	delete_condition  goto 100
+
+state 78
+	d_l_op:  AND.    (62)
+
+	.  reduce 62 (src line 390)
+
+
+state 79
+	d_l_op:  OR.    (63)
+
+	.  reduce 63 (src line 394)
+
+
+state 80
+	delete_condition:  IDENT a_op.NUMBER 
+	delete_condition:  IDENT a_op.STRING 
+
+	NUMBER  shift 101
+	STRING  shift 102
+	.  error
+
+
+state 81
+	a_op:  '>'.    (41)
+	a_op:  '>'.'=' 
+
+	'='  shift 103
+	.  reduce 41 (src line 311)
+
+
+state 82
+	a_op:  '='.    (42)
+
+	.  reduce 42 (src line 312)
+
+
+state 83
+	a_op:  '<'.    (43)
+	a_op:  '<'.'=' 
+	a_op:  '<'.'>' 
+
+	'>'  shift 105
+	'='  shift 104
+	.  reduce 43 (src line 313)
+
+
+state 84
+	h_fragment_list:  h_fragment_list ','.h_fragment 
+
+	IDENT  shift 61
+	.  error
+
+	h_fragment  goto 106
+	h_fragment_limit  goto 60
+
+state 85
+	h_fragment:  h_fragment fragment_l_op.h_fragment_limit 
+
+	IDENT  shift 61
+	.  error
+
+	h_fragment_limit  goto 107
+
+state 86
+	fragment_l_op:  AND.    (38)
+
+	.  reduce 38 (src line 298)
+
+
+state 87
+	fragment_l_op:  OR.    (39)
+
+	.  reduce 39 (src line 302)
+
+
+state 88
+	fragment_l_op:  '&'.    (40)
+
+	.  reduce 40 (src line 306)
+
+
+state 89
+	h_fragment_limit:  IDENT a_op.NUMBER 
+
+	NUMBER  shift 108
+	.  error
+
+
+state 90
+	v_fragment_list:  v_fragment_list ','.v_fragment 
+
+	'('  shift 64
+	.  error
+
+	v_fragment  goto 109
+
+state 91
+	v_fragment:  '(' v_frag_columns.')' 
+	v_frag_columns:  v_frag_columns.',' column_name 
+
+	')'  shift 110
+	','  shift 111
+	.  error
+
+
+state 92
+	v_frag_columns:  column_name.    (50)
+
+	.  reduce 50 (src line 333)
+
+
+state 93
+	column_def_list:  column_def_list ',' column_def.    (15)
+
+	.  reduce 15 (src line 182)
+
+
+state 94
+	column_def:  column_name column_type null_opt.column_key_opt 
+	column_key_opt: .    (26)
+
+	PRIMARY  shift 114
+	KEY  shift 113
+	.  reduce 26 (src line 235)
+
+	column_key_opt  goto 112
+
+state 95
+	null_opt:  NOT.NULL 
+
+	NULL  shift 115
+	.  error
+
+
+state 96
+	char_type:  CHAR length_opt.    (22)
+
+	.  reduce 22 (src line 216)
+
+
+state 97
+	length_opt:  '('.NUMBER ')' 
+
+	NUMBER  shift 116
+	.  error
+
+
+state 98
+	insert_table:  INSERT INTO table_name VALUES '(' insert_values ')'.    (53)
+
+	.  reduce 53 (src line 346)
+
+
+state 99
+	insert_values:  insert_values ','.insert_value 
+
+	NUMBER  shift 75
+	STRING  shift 76
+	.  error
+
+	insert_value  goto 117
+
+state 100
+	delete_conditions:  delete_conditions d_l_op delete_condition.    (61)
+
+	.  reduce 61 (src line 384)
+
+
+state 101
+	delete_condition:  IDENT a_op NUMBER.    (64)
+
+	.  reduce 64 (src line 399)
+
+
+state 102
+	delete_condition:  IDENT a_op STRING.    (65)
+
+	.  reduce 65 (src line 405)
+
+
+state 103
+	a_op:  '>' '='.    (44)
+
+	.  reduce 44 (src line 314)
+
+
+state 104
+	a_op:  '<' '='.    (45)
+
+	.  reduce 45 (src line 315)
+
+
+state 105
+	a_op:  '<' '>'.    (46)
+
+	.  reduce 46 (src line 316)
+
+
+state 106
+	h_fragment_list:  h_fragment_list ',' h_fragment.    (34)
+	h_fragment:  h_fragment.fragment_l_op h_fragment_limit 
+
+	OR  shift 87
+	AND  shift 86
+	'&'  shift 88
+	.  reduce 34 (src line 274)
+
+	fragment_l_op  goto 85
+
+state 107
+	h_fragment:  h_fragment fragment_l_op h_fragment_limit.    (36)
+
+	.  reduce 36 (src line 286)
+
+
+state 108
+	h_fragment_limit:  IDENT a_op NUMBER.    (37)
+
+	.  reduce 37 (src line 292)
+
+
+state 109
+	v_fragment_list:  v_fragment_list ',' v_fragment.    (48)
+
+	.  reduce 48 (src line 322)
+
+
+state 110
+	v_fragment:  '(' v_frag_columns ')'.    (49)
+
+	.  reduce 49 (src line 328)
+
+
+state 111
+	v_frag_columns:  v_frag_columns ','.column_name 
+
+	IDENT  shift 53
+	.  error
+
+	column_name  goto 118
+
+state 112
+	column_def:  column_name column_type null_opt column_key_opt.    (16)
+
+	.  reduce 16 (src line 187)
+
+
+state 113
+	column_key_opt:  KEY.    (27)
+
+	.  reduce 27 (src line 239)
+
+
+state 114
+	column_key_opt:  PRIMARY.KEY 
+
+	KEY  shift 119
+	.  error
+
+
+state 115
+	null_opt:  NOT NULL.    (25)
+
+	.  reduce 25 (src line 230)
+
+
+state 116
+	length_opt:  '(' NUMBER.')' 
+
+	')'  shift 120
+	.  error
+
+
+state 117
+	insert_values:  insert_values ',' insert_value.    (55)
+
+	.  reduce 55 (src line 355)
+
+
+state 118
+	v_frag_columns:  v_frag_columns ',' column_name.    (51)
+
+	.  reduce 51 (src line 337)
+
+
+state 119
+	column_key_opt:  PRIMARY KEY.    (28)
+
+	.  reduce 28 (src line 243)
+
+
+state 120
+	length_opt:  '(' NUMBER ')'.    (23)
+
+	.  reduce 23 (src line 221)
+
+
+52 terminals, 35 nonterminals
+67 grammar rules, 121/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+84 working sets used
+memory: parser 53/120000
+1 extra closures
+92 shift entries, 1 exceptions
+47 goto entries
+3 entries saved by goto default
+Optimizer space used: output 120/120000
+120 table entries, 0 zero
+maximum spread: 52, maximum offset: 111
