@@ -1,0 +1,33 @@
+/*
+irpc.proto
+Author: Kunyao Wu
+the definition of data structure and service
+for table transmisison(PushTable)
+and executer call(ExecuterCaller)
+*/
+
+syntax = "proto3";
+
+option go_package = "irpctran";
+
+package irpctran;
+
+service PushTable {
+  rpc PushTable(Table) returns (IrpcStatus) {}
+}
+
+service ExecuterCaller{
+  rpc ExecuterCall(IrpcCallReq) returns (IrpcStatus) {}
+}
+
+message IrpcCallReq {
+  int64 Txnid = 1;
+}
+
+message IrpcStatus {
+  int64 isSuc = 1;
+}
+
+message Table {
+  string createstmt = 1; //create TableName (Col1 varchar(255), Col2 int, Col3 varchar255)
+}
