@@ -1,0 +1,125 @@
+# INIT >>>> don't copy this line >>> don't copy this line >>>
+
+CREATE TABLE publisher[ id int(24) key,name char(100),nation char(100)];
+CREATE TABLE customer[ id int(24) key,name char(100),rank char(100)];
+CREATE TABLE book[ id int(24) key,title char(100),authors char(100),publisher_id int(24),copies int(24)];
+CREATE TABLE orders[ customer_id int(24),Book_id int(24) key,quantity int(24)];
+
+CREATE FRAGMENTATION publisher( H,1 publisher.id<104000ANDpublisher.nation='PRC' 1,2 publisher.id<104000ANDpublisher.nation='PRC' 2,3 publisher.id>=104000ANDpublisher.nation='USA' 3,4 publisher.id>=104000ANDpublisher.nation='USA' 4 );
+CREATE FRAGMENTATION book( H,1 book.id<205000 1,2 book.id>=205000ANDid<210000 2,3 book.id>=210000 3);
+CREATE FRAGMENTATION customer( V,1 customer.idANDcustomer.name 1,2 customer.idANDcusomer.rank 2);
+CREATE FRAGMENTATION orders( H,1 orders.customer_id<307000ANDorders.customer_id<215000 1,2 orders.customer_id<307000ANDorders.book_id>=215000 2,3 orders.customer_id>=307000ANDorders.book_id<215000 3,4 orders.cusomer_id>=307000ANDorders.book_id>=215000 4);
+
+# LOAD  >>>> don't copy this line >>> don't copy this line >>>
+
+LOCAL CREATE TABLE publisher (id int(6) key, name char(100), nation char(3)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE publisher FROM LOCAL FILE /home/xiaotong/publisher.tsv;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id<104000 nation='PRC') TO publisher_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id<104000 nation='USA') TO publisher_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id>=104000 nation='PRC') TO publisher_3 ON SITE 3;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id>=104000 nation='USA') TO publisher_4 ON SITE 4;
+LOCAL FINISH;
+
+LOCAL CREATE TABLE book (id int(6) key, title char(100), authors char(100), publisher_id char(100), copies char(100)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE book FROM LOCAL FILE /home/xiaotong/book.tsv;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id<205000) TO book_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id>=205000 id<2150000) TO book_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id>=2150000) TO book_3 ON SITE 3;
+LOCAL FINISH;
+
+LOCAL CREATE TABLE customer (id int(6) key, name char(100), rank char(100)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE customer FROM LOCAL FILE /home/xiaotong/customer.tsv;
+LOCAL LOAD LOCALDATA TABLE customer BY V WITH ( id name) TO customer_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE customer BY V WITH ( id rank) TO customer_2 ON SITE 2;
+LOCAL FINISH;
+
+LOCAL CREATE TABLE orders (customer_id int(6), book_id int(6), quantity int(6)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE orders FROM LOCAL FILE /home/xiaotong/orders.tsv;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id<307000 book_id<215000) TO orders_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id<307000 book_id>=215000) TO orders_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id>=307000 book_id<215000) TO orders_3 ON SITE 3;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id>=307000 book_id>=215000) TO orders_4 ON SITE 4;
+LOCAL FINISH;
+
+
+# SELECT 
+
+SELECT * FROM customer; 
+15000 rows check
+SELECT publisher.name FROM publisher;
+5000 rows check
+SELECT book.title FROM book WHERE book.copies>5000;
+24906 rows check
+SELECT orders.customer_id,orders.quantity FROM orders WHERE orders.quantity<8;
+99346 rows check
+SELECT book.title,book.copies,publisher.name,publisher.nation FROM book,publisher WHERE book.publisher_id=publisher.id and publisher.nation='USA' and book.copies>1000;
+21923 rows check
+SELECT customer.name,orders.quantity FROM customer,orders WHERE customer.id=orders.customer_id;
+100000 rows 
+SELECT customer.name,customer.rank,orders.quantity FROM customer,orders WHERE customer.id=orders.customer_id and customer.rank=1;
+41098 rows 
+SELECT customer.name,orders.quantity,book.title FROM customer,orders,book WHERE customer.id=orders.cusomer_id and book.id=orders.book_id and customer.rank=1 and book.copies>5000;
+20612 rows // 运行不下去 会卡住 ？超级慢？卡在node_4节点上
+SELECT customer.name,book.title,publisher.name,orders.quantity FROM customer,book,publisher,orders WHERE customer.id=orders.customer_id and book.id=orders.book_id and book.publisher_id=publisher.id and book.id>220000 and publisher.nation='USA' and orders.quantity>1;
+20209 rows // ok 慢
+SELECT customer.name,book.title,publisher.name,orders.quantity FROM customer,book,publisher,orders WHERE customer.id=orders.customer_id and book.id=orders.book_id and book.publisher_id=publisher.id and customer.id>308000 and book.copies>100 and orders.quantity>1 and publisher.nation='PRC';
+16345 rows // ok 慢
+#INSERT
+
+INSERT INTO TABLE customer ( id,name,rank ) VALUES ( 300001,'Xiaoming',1 );
+#The involved sites: Site1,Site2
+#(300001,'Xiaoming') is inserted into Site1
+#(300001,1) is inserted into Site2
+
+DELETE FROM TABLE customer WHERE customer.id=300001 and customer.name='Xiaoming';
+SELECT customer.id,customer.name,customer.rank FROM customer WHERE customer.id=300001 and customer.name='Xiaoming';
+
+INSERT INTO TABLE publisher ( id,name,nation ) VALUES ( 104001,'High Education Press','PRC' );
+#The invoved site: Site3
+DELETE FROM TABLE publisher WHERE publisher.id=104001 and publisher.name='High Education Press' and publisher.nation='PRC';
+
+INSERT INTO TABLE customer ( id,name,rank ) VALUES ( 300002,'Xiaohong',1 );
+#The invoved sites: Site1,Site2
+#(300002,'Xiaohong') is inserted into Site1
+#(300002,1) is inserted into Site2
+DELETE FROM TABLE customer WHERE customer.id=300002 and customer.name='Xiaohong' and customer.rank=1;
+
+INSERT INTO TABLE book ( id,title,authors,publisher_id,copies ) VALUES ( 205001,'DDB','Oszu',104001,100 );
+#The involved site: Site2
+
+DELETE FROM TABLE book WHERE book.id=205001 and book.title='DDB' and book.authors='Oszu' and book.publisher_id=104001 and book.copies=100;
+
+INSERT INTO TABLE orders ( customer_id,book_id,quantity ) VALUES ( 300001,205001,5 );
+#The invoved site: Site2
+DELETE FROM TABLE orders WHERE orders.customer_id=300001 and orders.book_id=205001 and orders.quantity=5;
+#DELETE
+
+DELETE FROM TABLE book WHERE book.copies=100;
+#The involved sites: Site1, Site2, Site3
+#(2050001,'DDB','Oszu',1040001,100) is deleted from Site2 
+
+DELETE FROM TABLE publisher WHERE publisher.nation='PRC'; 
+#The involved sites: Site1,Site3
+#(104001,'High Education Press','PRC') is deleted from Site3
+
+DELETE FROM TABLE customer WHERE customer.rank=1; // 稍微简单一些
+#The involved sites: Site1,Site2
+#(300001,'Xiaohong') is deleted from Site1
+#(300001,1) is deleted from Site2 
+
+DELETE FROM TABLE orders; //内存泄漏
+#The invoved sites: Site1,Site2,Site3,Site4
+#(300001,205001,5) is deleted from Site2
+
+DELETE FROM TABLE publisher;
+DELETE FROM TABLE orders;
+DELETE FROM TABLE customer;
+DELETE FROM TABLE book;
+
+# unfinished // 先join到一起，找到id 然后删除对应id的内容
+DELETE FROM TABLE customer WHERE customer.name='Xiaohong' and customer.rank=1;
+#The involved sites: Site1,Site2
+#(300002,'Xiaohong') is deleted from Site1
+#(300002,1) is deleted from Site2
+
+DROP TABLE publisher_1;

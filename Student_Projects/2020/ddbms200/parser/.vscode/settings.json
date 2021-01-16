@@ -1,0 +1,10 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.associations": {
+        "string": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp",
+        "ostream": "cpp",
+        "vector": "cpp"
+    }
+}

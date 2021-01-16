@@ -1,0 +1,43 @@
+CREATE TABLE pulisher[ id int(24) key,name char(100),nation char(100)];
+CREATE TABLE customer[ id int(24) key,name char(100),rank char(100)];
+CREATE TABLE book[ id int(24) key,title char(100),authors char(100),publisher_id int(24),copies int(24)];
+CREATE TABLE orders[ customer_id int(24),book_id int(24),quantity int(24)];
+
+CREATE FRAGMENTATION publisher( H,1 publisher.id<104000ANDpublisher.nation='PRC' 1,2 publisher.id<104000ANDpublisher.nation='PRC' 2,3 publisher.id>=104000ANDpublisher.nation='USA' 3,4 publisher.id>=104000ANDpublisher.nation='USA' 4 );
+CREATE FRAGMENTATION book( H,1 book.id<205000 1,2 book.id>=205000ANDid<210000 2,3 book.id>=210000 3);
+CREATE FRAGMENTATION customer( V,1 customer.idANDcustomer.name 1,2 customer.idANDcusomer.rank 2);
+CREATE FRAGMENTATION orders( H,1 orders.customer_id<307000ANDorders.customer_id<215000 1,2 orders.customer_id<307000ANDorders.book_id>=215000 2,3 orders.customer_id>=307000ANDorders.book_id<215000 3,4 orders.cusomer_id>=307000ANDorders.book_id>=215000 4);
+
+
+LOCAL CREATE TABLE publisher (id int(6) key, name char(100), nation char(3)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE publisher FROM LOCAL FILE /home/xiaotong/publisher.tsv;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id<104000 nation='PRC') TO publisher_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id<104000 nation='USA') TO publisher_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id>=104000 nation='PRC') TO publisher_3 ON SITE 3;
+LOCAL LOAD LOCALDATA TABLE publisher BY H WITH ( id>=104000 nation='USA') TO publisher_4 ON SITE 4;
+LOCAL FINISH;
+
+LOCAL CREATE TABLE book (id int(6) key, title char(100), authors char(100), publisher_id char(100), copies char(100)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE book FROM LOCAL FILE /home/xiaotong/book.tsv;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id<205000) TO book_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id>=205000 id<2150000) TO book_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE book BY H WITH ( id>=210000) TO book_3 ON SITE 3;
+LOCAL FINISH;
+
+LOCAL CREATE TABLE orders (customer_id int(6), book_id int(6), quantity int(6)) ON SITE 1;
+LOCAL LOAD ALLDATA TO TABLE orders FROM LOCAL FILE /home/xiaotong/orders.tsv;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id<307000 book_id<215000) TO orders_1 ON SITE 1;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id<307000 book_id>=215000) TO orders_2 ON SITE 2;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id>=307000 book_id<215000) TO orders_3 ON SITE 3;
+LOCAL LOAD LOCALDATA TABLE orders BY H WITH ( customer_id>=307000 book_id>=215000) TO orders_4 ON SITE 4;
+LOCAL FINISH;
+
+SELECT * FROM customer;
+SELECT orders.customer_id,orders.quantity FROM orders WHERE orders.quantity<8;
+
+DELETE FROM TABLE book WHERE book.copies=100;
+DELETE FROM TABLE orders;
+
+INSERT INTO TABLE customer ( id,name,rank ) VALUES ( 1,'Xiaoming',1 );
+INSERT INTO TABLE publisher ( id,name,nation ) VALUES ( 104001,'High Education Press','PRC' );
+DELETE FROM TABLE publisher WHERE publisher.nation='PRC';

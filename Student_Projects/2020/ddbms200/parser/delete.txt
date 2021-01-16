@@ -1,0 +1,8 @@
+sitename>>>
+s1/
+s2/
+s3/
+sql>>>
+DELETE FROM TABLE book_1 WHERE copies=100/
+DELETE FROM TABLE book_2 WHERE copies=100/
+DELETE FROM TABLE book_3 WHERE copies=100/

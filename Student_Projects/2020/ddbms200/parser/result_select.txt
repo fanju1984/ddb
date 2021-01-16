@@ -1,0 +1,771 @@
+SELECT * FROM customer;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+0
+H 1
+SELECT publisher.name FROM publisher;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM publisher_1/
+child =>
+parent =>
+5
+==2==
+site =>2
+sql_statement =>SELECT * FROM publisher_2/
+child =>
+parent =>
+5
+==3==
+site =>3
+sql_statement =>SELECT * FROM publisher_3/
+child =>
+parent =>
+5
+==4==
+site =>4
+sql_statement =>SELECT * FROM publisher_4/
+child =>
+parent =>
+5
+==5==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_4 UNION ALL SELECT * FROM tree_0_node_3 UNION ALL SELECT * FROM tree_0_node_2 UNION ALL SELECT * FROM tree_0_node_1/
+child =>
+4
+3
+2
+1
+parent =>
+6
+==6==
+site =>1
+sql_statement =>SELECT tree_0_node_5.name FROM tree_0_node_5/
+child =>
+5
+parent =>
+0
+H 1
+SELECT book.title FROM book WHERE book.copies>5000;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM book_1 WHERE copies>5000/
+child =>
+parent =>
+4
+==2==
+site =>2
+sql_statement =>SELECT * FROM book_2 WHERE copies>5000/
+child =>
+parent =>
+4
+==3==
+site =>3
+sql_statement =>SELECT * FROM book_3 WHERE copies>5000/
+child =>
+parent =>
+4
+==4==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3 UNION ALL SELECT * FROM tree_0_node_2 UNION ALL SELECT * FROM tree_0_node_1/
+child =>
+3
+2
+1
+parent =>
+5
+==5==
+site =>1
+sql_statement =>SELECT tree_0_node_4.title FROM tree_0_node_4/
+child =>
+4
+parent =>
+0
+H 1
+SELECT orders.customer_id,orders.quantity FROM orders WHERE orders.quantity<8;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM orders_1 WHERE quantity<8/
+child =>
+parent =>
+5
+==2==
+site =>2
+sql_statement =>SELECT * FROM orders_2 WHERE quantity<8/
+child =>
+parent =>
+5
+==3==
+site =>3
+sql_statement =>SELECT * FROM orders_3 WHERE quantity<8/
+child =>
+parent =>
+5
+==4==
+site =>4
+sql_statement =>SELECT * FROM orders_4 WHERE quantity<8/
+child =>
+parent =>
+5
+==5==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_4 UNION ALL SELECT * FROM tree_0_node_3 UNION ALL SELECT * FROM tree_0_node_2 UNION ALL SELECT * FROM tree_0_node_1/
+child =>
+4
+3
+2
+1
+parent =>
+6
+==6==
+site =>1
+sql_statement =>SELECT tree_0_node_5.customer_id,tree_0_node_5.quantity FROM tree_0_node_5/
+child =>
+5
+parent =>
+0
+H 1
+H 1
+SELECT book.title,book.copies,publisher.name,publisher.nation FROM book,publisher WHERE book.publisher_id=publisher.id and publisher.nation='USA' and book.copies>1000;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM book_1 WHERE copies>1000/
+child =>
+parent =>
+4
+==2==
+site =>2
+sql_statement =>SELECT * FROM book_2 WHERE copies>1000/
+child =>
+parent =>
+4
+==3==
+site =>3
+sql_statement =>SELECT * FROM book_3 WHERE copies>1000/
+child =>
+parent =>
+4
+==4==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3 UNION ALL SELECT * FROM tree_0_node_2 UNION ALL SELECT * FROM tree_0_node_1/
+child =>
+3
+2
+1
+parent =>
+10
+==5==
+site =>1
+sql_statement =>SELECT * FROM publisher_1 WHERE nation='USA'/
+child =>
+parent =>
+9
+==6==
+site =>2
+sql_statement =>SELECT * FROM publisher_2 WHERE nation='USA'/
+child =>
+parent =>
+9
+==7==
+site =>3
+sql_statement =>SELECT * FROM publisher_3 WHERE nation='USA'/
+child =>
+parent =>
+9
+==8==
+site =>4
+sql_statement =>SELECT * FROM publisher_4 WHERE nation='USA'/
+child =>
+parent =>
+9
+==9==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_8 UNION ALL SELECT * FROM tree_0_node_7 UNION ALL SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5/
+child =>
+8
+7
+6
+5
+parent =>
+10
+==10==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_4,tree_0_node_9 WHERE 0_node_4.publisher_id=tree_0_node_9.id/
+child =>
+4
+9
+parent =>
+11
+==11==
+site =>1
+sql_statement =>SELECT tree_0_node_10.title,tree_0_node_10.copies,tree_0_node_10.name,tree_0_node_10.nation FROM tree_0_node_10/
+child =>
+10
+parent =>
+0
+H 1
+SELECT customer.name,orders.quantity FROM customer,orders WHERE customer.id=orders.customer_id;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+9
+==4==
+site =>1
+sql_statement =>SELECT * FROM orders_1/
+child =>
+parent =>
+8
+==5==
+site =>2
+sql_statement =>SELECT * FROM orders_2/
+child =>
+parent =>
+8
+==6==
+site =>3
+sql_statement =>SELECT * FROM orders_3/
+child =>
+parent =>
+8
+==7==
+site =>4
+sql_statement =>SELECT * FROM orders_4/
+child =>
+parent =>
+8
+==8==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_7 UNION ALL SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5 UNION ALL SELECT * FROM tree_0_node_4/
+child =>
+7
+6
+5
+4
+parent =>
+9
+==9==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3,tree_0_node_8 WHERE 0_node_3.id=tree_0_node_8./
+child =>
+3
+8
+parent =>
+10
+==10==
+site =>1
+sql_statement =>SELECT tree_0_node_9.name,tree_0_node_9.quantity FROM tree_0_node_9/
+child =>
+9
+parent =>
+0
+H 1
+SELECT customer.name,orders.rank,orders.quantity FROM customer,orders WHERE customer.id=orders.customer_id and customer.rank=1;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+9
+==4==
+site =>1
+sql_statement =>SELECT * FROM orders_1/
+child =>
+parent =>
+8
+==5==
+site =>2
+sql_statement =>SELECT * FROM orders_2/
+child =>
+parent =>
+8
+==6==
+site =>3
+sql_statement =>SELECT * FROM orders_3/
+child =>
+parent =>
+8
+==7==
+site =>4
+sql_statement =>SELECT * FROM orders_4/
+child =>
+parent =>
+8
+==8==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_7 UNION ALL SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5 UNION ALL SELECT * FROM tree_0_node_4/
+child =>
+7
+6
+5
+4
+parent =>
+9
+==9==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3,tree_0_node_8 WHERE 0_node_3.id=tree_0_node_8.customer_id/
+child =>
+3
+8
+parent =>
+10
+==10==
+site =>1
+sql_statement =>SELECT tree_0_node_9.name,tree_0_node_9.rank,tree_0_node_9.quantity FROM tree_0_node_9/
+child =>
+9
+parent =>
+0
+H 1
+H 1
+SELECT customer.name,orders.quantity,book.title FROM customer,orders,book WHERE customer.id=orders.cusomer_id and book.id=orders.book_id and customer.rank=1 and book.copies>5000;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+13
+==4==
+site =>1
+sql_statement =>SELECT * FROM orders_1/
+child =>
+parent =>
+8
+==5==
+site =>2
+sql_statement =>SELECT * FROM orders_2/
+child =>
+parent =>
+8
+==6==
+site =>3
+sql_statement =>SELECT * FROM orders_3/
+child =>
+parent =>
+8
+==7==
+site =>4
+sql_statement =>SELECT * FROM orders_4/
+child =>
+parent =>
+8
+==8==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_7 UNION ALL SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5 UNION ALL SELECT * FROM tree_0_node_4/
+child =>
+7
+6
+5
+4
+parent =>
+13
+==9==
+site =>1
+sql_statement =>SELECT * FROM book_1 WHERE copies>5000/
+child =>
+parent =>
+12
+==10==
+site =>2
+sql_statement =>SELECT * FROM book_2 WHERE copies>5000/
+child =>
+parent =>
+12
+==11==
+site =>3
+sql_statement =>SELECT * FROM book_3 WHERE copies>5000/
+child =>
+parent =>
+12
+==12==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_11 UNION ALL SELECT * FROM tree_0_node_10 UNION ALL SELECT * FROM tree_0_node_9/
+child =>
+11
+10
+9
+parent =>
+14
+==13==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3,tree_0_node_8 WHERE 0_node_3.id=tree_0_node_8.cusomer_id/
+child =>
+3
+8
+parent =>
+14
+==14==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_12,tree_0_node_13 WHERE 0_node_12.id=tree_0_node_13.book_id/
+child =>
+12
+13
+parent =>
+15
+==15==
+site =>1
+sql_statement =>SELECT tree_0_node_14.name,tree_0_node_14.quantity,tree_0_node_14.title FROM tree_0_node_14/
+child =>
+14
+parent =>
+0
+H 1
+H 1
+H 1
+SELECT customer.name,book.title,publisher.name,orders.quantity FROM customer,book,publisher,orders WHERE customer.id=orders.customer_id and book.id=orders.book_id and book.publisher_id=publisher.id and book.id>220000 and publisher.nation='USA' and orders.quantity>1;/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+18
+==4==
+site =>1
+sql_statement =>SELECT * FROM book_1 WHERE id>220000/
+child =>
+parent =>
+7
+==5==
+site =>2
+sql_statement =>SELECT * FROM book_2 WHERE id>220000/
+child =>
+parent =>
+7
+==6==
+site =>3
+sql_statement =>SELECT * FROM book_3 WHERE id>220000/
+child =>
+parent =>
+7
+==7==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5 UNION ALL SELECT * FROM tree_0_node_4/
+child =>
+6
+5
+4
+parent =>
+19
+==8==
+site =>1
+sql_statement =>SELECT * FROM publisher_1 WHERE nation='USA'/
+child =>
+parent =>
+12
+==9==
+site =>2
+sql_statement =>SELECT * FROM publisher_2 WHERE nation='USA'/
+child =>
+parent =>
+12
+==10==
+site =>3
+sql_statement =>SELECT * FROM publisher_3 WHERE nation='USA'/
+child =>
+parent =>
+12
+==11==
+site =>4
+sql_statement =>SELECT * FROM publisher_4 WHERE nation='USA'/
+child =>
+parent =>
+12
+==12==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_11 UNION ALL SELECT * FROM tree_0_node_10 UNION ALL SELECT * FROM tree_0_node_9 UNION ALL SELECT * FROM tree_0_node_8/
+child =>
+11
+10
+9
+8
+parent =>
+20
+==13==
+site =>1
+sql_statement =>SELECT * FROM orders_1 WHERE quantity>1/
+child =>
+parent =>
+17
+==14==
+site =>2
+sql_statement =>SELECT * FROM orders_2 WHERE quantity>1/
+child =>
+parent =>
+17
+==15==
+site =>3
+sql_statement =>SELECT * FROM orders_3 WHERE quantity>1/
+child =>
+parent =>
+17
+==16==
+site =>4
+sql_statement =>SELECT * FROM orders_4 WHERE quantity>1/
+child =>
+parent =>
+17
+==17==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_16 UNION ALL SELECT * FROM tree_0_node_15 UNION ALL SELECT * FROM tree_0_node_14 UNION ALL SELECT * FROM tree_0_node_13/
+child =>
+16
+15
+14
+13
+parent =>
+18
+==18==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3,tree_0_node_17 WHERE 0_node_3.id=tree_0_node_17.customer_id/
+child =>
+3
+17
+parent =>
+19
+==19==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_7,tree_0_node_18 WHERE 0_node_7.id=tree_0_node_18.book_id/
+child =>
+7
+18
+parent =>
+20
+==20==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_19,tree_0_node_12 WHERE 0_node_19.publisher_id=tree_0_node_12.id/
+child =>
+19
+12
+parent =>
+21
+==21==
+site =>1
+sql_statement =>SELECT tree_0_node_20.name,tree_0_node_20.title,tree_0_node_20.name,tree_0_node_20.quantity FROM tree_0_node_20/
+child =>
+20
+parent =>
+0
+H 1
+H 1
+H 1
+SELECT customer.name,book.title,publisher.name,orders.quantity FROM customer,book,publisher,orders WHERE customer.id=orders.customer_id and book.id=orders.book_id and book.publisher_id=publisher.id and customer.id>308000 and book.copies>100 and orders.quantity>1 and publisher.nation='PRC';/
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_2,tree_0_node_1 WHERE tree_0_node_2.id=tree_0_node_1.id/
+child =>
+2
+1
+parent =>
+18
+==4==
+site =>1
+sql_statement =>SELECT * FROM book_1 WHERE copies>100/
+child =>
+parent =>
+7
+==5==
+site =>2
+sql_statement =>SELECT * FROM book_2 WHERE copies>100/
+child =>
+parent =>
+7
+==6==
+site =>3
+sql_statement =>SELECT * FROM book_3 WHERE copies>100/
+child =>
+parent =>
+7
+==7==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_6 UNION ALL SELECT * FROM tree_0_node_5 UNION ALL SELECT * FROM tree_0_node_4/
+child =>
+6
+5
+4
+parent =>
+19
+==8==
+site =>1
+sql_statement =>SELECT * FROM publisher_1 WHERE nation='PRC'/
+child =>
+parent =>
+12
+==9==
+site =>2
+sql_statement =>SELECT * FROM publisher_2 WHERE nation='PRC'/
+child =>
+parent =>
+12
+==10==
+site =>3
+sql_statement =>SELECT * FROM publisher_3 WHERE nation='PRC'/
+child =>
+parent =>
+12
+==11==
+site =>4
+sql_statement =>SELECT * FROM publisher_4 WHERE nation='PRC'/
+child =>
+parent =>
+12
+==12==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_11 UNION ALL SELECT * FROM tree_0_node_10 UNION ALL SELECT * FROM tree_0_node_9 UNION ALL SELECT * FROM tree_0_node_8/
+child =>
+11
+10
+9
+8
+parent =>
+20
+==13==
+site =>1
+sql_statement =>SELECT * FROM orders_1 WHERE quantity>1/
+child =>
+parent =>
+17
+==14==
+site =>2
+sql_statement =>SELECT * FROM orders_2 WHERE quantity>1/
+child =>
+parent =>
+17
+==15==
+site =>3
+sql_statement =>SELECT * FROM orders_3 WHERE quantity>1/
+child =>
+parent =>
+17
+==16==
+site =>4
+sql_statement =>SELECT * FROM orders_4 WHERE quantity>1/
+child =>
+parent =>
+17
+==17==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_16 UNION ALL SELECT * FROM tree_0_node_15 UNION ALL SELECT * FROM tree_0_node_14 UNION ALL SELECT * FROM tree_0_node_13/
+child =>
+16
+15
+14
+13
+parent =>
+18
+==18==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_3,tree_0_node_17 WHERE 0_node_3.id=tree_0_node_17.customer_id/
+child =>
+3
+17
+parent =>
+19
+==19==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_7,tree_0_node_18 WHERE 0_node_7.id=tree_0_node_18.book_id/
+child =>
+7
+18
+parent =>
+20
+==20==
+site =>1
+sql_statement =>SELECT * FROM tree_0_node_19,tree_0_node_12 WHERE 0_node_19.publisher_id=tree_0_node_12.id/
+child =>
+19
+12
+parent =>
+21
+==21==
+site =>1
+sql_statement =>SELECT tree_0_node_20.name,tree_0_node_20.title,tree_0_node_20.name,tree_0_node_20.quantity FROM tree_0_node_20/
+child =>
+20
+parent =>
+0
