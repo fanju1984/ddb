@@ -1,0 +1,18 @@
+syntax="proto2";
+
+option cc_generic_services = true;
+
+message QueryUsersRequest{
+    repeated string query = 1;
+}
+
+message QueryUsersResponse{
+    repeated int32 id = 1;
+    repeated string name = 2;
+    repeated string fullname = 3;
+    repeated string password = 4;
+}
+
+service QueryService{
+    rpc QueryUsers(QueryUsersRequest) returns (QueryUsersResponse);
+}
