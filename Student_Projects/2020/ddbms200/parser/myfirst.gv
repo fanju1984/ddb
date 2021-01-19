@@ -1,0 +1,6 @@
+#!/bin/sh
+digraph G {
+a[label="node a",shape=record];
+b[label="node b",shape=ellipse];
+a->b[label="edge a-> b",color=lightblue] ;
+} 

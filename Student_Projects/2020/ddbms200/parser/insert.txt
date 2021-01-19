@@ -1,0 +1,19 @@
+sql_statement :INSERT INTO TABLE customer ( id,name,rank ) VALUES ( 300001,'Xiaoming',1 );/
+s1/
+s2/
+INSERT INTO customer_1 (id,name) VALUES (300001,'Xiaoming')/
+INSERT INTO customer_2 (id,rank) VALUES (300001,1)/
+sql_statement :INSERT INTO TABLE publisher ( id,name,nation ) VALUES ( 104001,'High Education Press','PRC' );/
+s3/
+INSERT INTO publisher_3 (id,name,nation) VALUES (104001,'High Education Press','PRC')/
+sql_statement :INSERT INTO TABLE book ( id,title,authors,publisher_id,copies ) VALUES ( 205001,'DDB','Oszu',104001,100 );/
+s2/
+INSERT INTO book_2 (id,title,authors,publisher_id,copies) VALUES (205001,'DDB','Oszu',104001,100)/
+sql_statement :INSERT INTO TABLE orders ( customer_id,book_id,quantity ) VALUES ( 300001,205001,5 );/
+s2/
+INSERT INTO orders_2 (customer_id,book_id,quantity) VALUES (300001,205001,5)/
+sql_statement :INSERT INTO TABLE customer ( id,name,rank ) VALUES ( 300002,'Xiaohong',1 );/
+s1/
+s2/
+INSERT INTO customer_1 (id,name) VALUES (300002,'Xiaohong')/
+INSERT INTO customer_2 (id,rank) VALUES (300002,1)/

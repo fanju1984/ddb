@@ -1,0 +1,184 @@
+>>>myt :1607957430/
+condition_list in GetTCCListTest>>>
+customer.id=orders.cusomer_id/
+book.id=orders.book_id/
+customer.rank=1/
+book.copies>5000/
+TCCList>>>
+table_name :customer/
+column_list >>> 
+customer.id/
+customer.rank/
+customer.name/
+condition_list >>> 
+customer.rank=1/
+fratype :V/
+table_name :orders/
+column_list >>> 
+orders.cusomer_id/
+orders.book_id/
+orders.quantity/
+condition_list >>> 
+fratype :H/
+table_name :book/
+column_list >>> 
+book.id/
+book.copies/
+book.title/
+condition_list >>> 
+book.copies>5000/
+fratype :H/
+condition_list>>>
+condition_list>>>
+book.copies>5000/
+table_1 :customer
+table_2 :orders
+table_1 :book
+table_2 :orders
+join done
+tablecollumn customer.name,orders.quantity,book.title/
+name/
+quantity/
+title/
+TREE >>>
+==1==
+site =>1
+sql_statement =>SELECT * FROM customer_1/
+child =>
+parent =>
+3
+==2==
+site =>2
+sql_statement =>SELECT * FROM customer_2/
+child =>
+parent =>
+3
+==3==
+site =>1
+sql_statement =>SELECT * FROM tree_1607957430_node_2 JOIN tree_1607957430_node_1 USING (id)/
+child =>
+2
+1
+parent =>
+4
+==4==
+site =>1
+sql_statement =>SELECT * FROM tree_1607957430_node_3 WHERE rank=1/
+child =>
+3
+parent =>
+14
+==5==
+site =>1
+sql_statement =>SELECT cusomer_id,book_id,quantity FROM orders_1/
+child =>
+parent =>
+9
+==6==
+site =>2
+sql_statement =>SELECT cusomer_id,book_id,quantity FROM orders_2/
+child =>
+parent =>
+9
+==7==
+site =>3
+sql_statement =>SELECT cusomer_id,book_id,quantity FROM orders_3/
+child =>
+parent =>
+9
+==8==
+site =>4
+sql_statement =>SELECT cusomer_id,book_id,quantity FROM orders_4/
+child =>
+parent =>
+9
+==9==
+site =>1
+sql_statement =>SELECT * FROM tree_1607957430_node_8 UNION ALL SELECT * FROM tree_1607957430_node_7 UNION ALL SELECT * FROM tree_1607957430_node_6 UNION ALL SELECT * FROM tree_1607957430_node_5/
+child =>
+8
+7
+6
+5
+parent =>
+14
+==10==
+site =>1
+sql_statement =>SELECT id,copies,title FROM book_1 WHERE copies>5000/
+child =>
+parent =>
+13
+==11==
+site =>2
+sql_statement =>SELECT id,copies,title FROM book_2 WHERE copies>5000/
+child =>
+parent =>
+13
+==12==
+site =>3
+sql_statement =>SELECT id,copies,title FROM book_3 WHERE copies>5000/
+child =>
+parent =>
+13
+==13==
+site =>1
+sql_statement =>SELECT * FROM tree_1607957430_node_12 UNION ALL SELECT * FROM tree_1607957430_node_11 UNION ALL SELECT * FROM tree_1607957430_node_10/
+child =>
+12
+11
+10
+parent =>
+15
+==14==
+site =>1
+sql_statement =>SELECT tree_1607957430_node_4.id,tree_1607957430_node_9.cusomer_id,tree_1607957430_node_9.book_id,tree_1607957430_node_4.rank,tree_1607957430_node_4.name,tree_1607957430_node_9.quantity FROM tree_1607957430_node_4,tree_1607957430_node_9 WHERE tree_1607957430_node_4.id=tree_1607957430_node_9.cusomer_id/
+child =>
+4
+9
+parent =>
+15
+==15==
+site =>1
+sql_statement =>SELECT tree_1607957430_node_14.cusomer_id,tree_1607957430_node_13.id,tree_1607957430_node_14.book_id,tree_1607957430_node_13.copies,tree_1607957430_node_14.quantity,tree_1607957430_node_13.title FROM tree_1607957430_node_13,tree_1607957430_node_14 WHERE tree_1607957430_node_13.id=tree_1607957430_node_14.book_id/
+child =>
+13
+14
+parent =>
+16
+==16==
+site =>1
+sql_statement =>SELECT name,quantity,title FROM tree_1607957430_node_15/
+child =>
+15
+parent =>
+0
+child 15 on processing ...
+child 13 on processing ...
+child 14 on processing ...
+child 12 on processing ...
+child 4 on processing ...
+child 11 on processing ...
+child 9 on processing ...
+child 10 on processing ...
+child 3 on processing ...
+child 2 on processing ...
+child 8 on processing ...
+child 1 on processing ...
+child 7 on processing ...
+child 6 on processing ...
+child 5 on processing ...
+connect success！
+connect success！
+Error： mysql_query !
+connect success！
+Get file information success
+Get file information success
+length:    1939
+@; transfered success!
+tmp table loading of tree_1607957430_node_12 succeed!
+length:    196476
+p)�� transfered success!
+tmp table loading of tree_1607957430_node_2 succeed!
+tmp table loading of tree_1607957430_node_1 succeed!
+connect success！
+length:    696633
