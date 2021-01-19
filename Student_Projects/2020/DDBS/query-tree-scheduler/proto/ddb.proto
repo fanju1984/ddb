@@ -1,0 +1,86 @@
+syntax="proto2";
+option cc_generic_services = true;
+
+message TableRequest{
+    optional string temp_table_name = 1;
+//    required int32 unique_query_id = 2;
+}
+
+message TableResponse{
+    optional string attr_meta = 1;
+    repeated string attr_values = 2;
+}
+
+message LoadTableRequest{
+    optional string table_name = 1;
+    optional string attr_meta = 2;
+    repeated string attr_values = 3;
+}
+
+message LoadTableResponse{
+    optional string result = 1;
+}
+
+message DeleteTempTableRequest{
+    optional string temp_table_name = 1;
+}
+
+message DeleteTempTableResponse{
+    optional string result = 1;
+}
+
+message ExecuteNonQuerySQLRequest{
+    optional string sql = 1;
+}
+
+message ExecuteNonQuerySQLResponse{
+    optional string result = 1;
+}
+
+message ExecuteQuerySQLRequest{
+    optional string sql = 1;
+}
+
+message ExecuteQuerySQLResponse{
+    optional string attr_meta = 1;
+    repeated string attr_values = 2;
+}
+
+service DDBService{
+    rpc RequestTable(TableRequest) returns (TableResponse);
+
+    rpc LoadTable(LoadTableRequest) returns (LoadTableResponse);
+
+    rpc DeleteTable(DeleteTempTableRequest) returns (DeleteTempTableResponse);
+
+    rpc ExecuteNonQuerySQL(ExecuteNonQuerySQLRequest) returns (ExecuteNonQuerySQLResponse);
+
+    rpc ExecuteQuerySQL(ExecuteQuerySQLRequest) returns (ExecuteQuerySQLResponse);
+}
+
+// message QueryResponse{
+//     // column names
+//     repeated string columns = 1;
+
+//     // publisher table
+//     repeated int32 publisher_id = 2;
+//     repeated string publisher_name = 3;
+//     repeated string publisher_nation = 4;
+
+//     // book table
+//     repeated int32 book_id = 5;
+//     repeated string book_title = 6;
+//     repeated string book_author = 7;
+//     repeated int32 book_publisher_id = 8;
+//     repeated int32 book_copies = 9;
+
+//     // customer table
+//     repeated int32 customer_id = 10;
+//     repeated string customer_name = 11;
+//     repeated int32 customer_rank = 12;
+
+//     // order table
+//     repeated int32 order_id = 13;
+//     repeated int32 order_book_id = 14;
+//     repeated int32 order_quantity = 15;
+// }

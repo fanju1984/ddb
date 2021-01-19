@@ -1,0 +1,320 @@
+{
+  "tables": [
+    {
+      "rname": "Publisher",
+      "attributes": [
+        {
+          "aname": "id",
+          "is_key": true,
+          "type": 1,
+          "value_type": 1,
+          "value": [100001, 105000]
+        },
+        {
+          "aname": "name",
+          "is_key": false,
+          "type": 2
+        },
+        {
+          "aname": "nation",
+          "is_key": false,
+          "type": 2
+        }
+      ]
+    },
+    {
+      "rname": "Book",
+      "attributes": [
+        {
+          "aname": "id",
+          "is_key": true,
+          "type": 1,
+          "value_type": 1,
+          "value": [200001, 250000]
+        },
+        {
+          "aname": "title",
+          "is_key": false,
+          "type": 2
+        },
+        {
+          "aname": "authors",
+          "is_key": false,
+          "type": 2
+        },
+        {
+          "aname": "publisher_id",
+          "is_key": false,
+          "type": 1,
+          "value_type": 1,
+          "value": [100001, 105000]
+        },
+        {
+          "aname": "copies",
+          "is_key": false,
+          "type": 1,
+          "value_type": 2,
+          "value": [0, 10000]
+        }
+      ]
+    },
+    {
+      "rname": "Customer",
+      "attributes": [
+        {
+          "aname": "id",
+          "is_key": true,
+          "type": 1,
+          "value_type": 1,
+          "value": [300001, 315000]
+        },
+        {
+          "aname": "name",
+          "is_key": false,
+          "type": 2
+        },
+        {
+          "aname": "rank",
+          "is_key": false,
+          "type": 1,
+          "value_type": 4,
+          "Proportion": [
+            { "key": 1, "proportion": 0.4 },
+            { "key": 2, "proportion": 0.3 },
+            { "key": 3, "proportion": 0.3 }
+          ]
+        }
+      ]
+    },
+    {
+      "rname": "Orders",
+      "attributes": [
+        {
+          "aname": "customer_id",
+          "is_key": true,
+          "type": 1,
+          "value_type": 1,
+          "value": [300001, 315000]
+        },
+        {
+          "aname": "book_id",
+          "is_key": true,
+          "type": 1,
+          "value_type": 1,
+          "value": [200001, 250000]
+        },
+        {
+          "aname": "quantity",
+          "is_key": false,
+          "type": 1,
+          "value_type": 3,
+          "value": [3, 2]
+        }
+      ]
+    }
+  ],
+  "fragments": [
+    {
+      "rname": "Publisher",
+      "fname": "pub1",
+      "site": 1,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 4,
+          "aname": "id",
+          "num": 104000
+        },
+        {
+          "op_type": 6,
+          "aname": "nation",
+          "str": "PRC"
+        }
+      ]
+    },
+    {
+      "rname": "Publisher",
+      "fname": "pub2",
+      "site": 2,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 4,
+          "aname": "id",
+          "num": 104000
+        },
+        {
+          "op_type": 6,
+          "aname": "nation",
+          "str": "USA"
+        }
+      ]
+    },
+    {
+      "rname": "Publisher",
+      "fname": "pub3",
+      "site": 3,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "id",
+          "num": 104000
+        },
+        {
+          "op_type": 6,
+          "aname": "nation",
+          "str": "PRC"
+        }
+      ]
+    },
+    {
+      "rname": "Publisher",
+      "fname": "pub4",
+      "site": 4,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "id",
+          "num": 104000
+        },
+        {
+          "op_type": 6,
+          "aname": "nation",
+          "str": "USA"
+        }
+      ]
+    },
+    {
+      "rname": "Book",
+      "fname": "book1",
+      "site": 1,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 4,
+          "aname": "id",
+          "num": 205000
+        }
+      ]
+    },
+    {
+      "rname": "Book",
+      "fname": "book2",
+      "site": 2,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "id",
+          "num": 205000
+        },
+        {
+          "op_type": 4,
+          "aname": "id",
+          "num": 210000
+        }
+      ]
+    },
+    {
+      "rname": "Book",
+      "fname": "book3",
+      "site": 3,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "id",
+          "num": 210000
+        }
+      ]
+    },
+    {
+      "rname": "Customer",
+      "fname": "cus1",
+      "site": 1,
+      "is_horizontal": false,
+      "vf_condition": ["id", "name"]
+    },
+    {
+      "rname": "Customer",
+      "fname": "cus2",
+      "site": 2,
+      "is_horizontal": false,
+      "vf_condition": ["id", "rank"]
+    },
+    {
+      "rname": "Orders",
+      "fname": "ord1",
+      "site": 1,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 4,
+          "aname": "customer_id",
+          "num": 307000
+        },
+        {
+          "op_type": 4,
+          "aname": "book_id",
+          "num": 215000
+        }
+      ]
+    },
+    {
+      "rname": "Orders",
+      "fname": "ord2",
+      "site": 2,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 4,
+          "aname": "customer_id",
+          "num": 307000
+        },
+        {
+          "op_type": 1,
+          "aname": "book_id",
+          "num": 215000
+        }
+      ]
+    },
+    {
+      "rname": "Orders",
+      "fname": "ord3",
+      "site": 3,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "customer_id",
+          "num": 307000
+        },
+        {
+          "op_type": 4,
+          "aname": "book_id",
+          "num": 215000
+        }
+      ]
+    },
+    {
+      "rname": "Orders",
+      "fname": "ord4",
+      "site": 4,
+      "is_horizontal": true,
+      "hf_condition": [
+        {
+          "op_type": 1,
+          "aname": "customer_id",
+          "num": 307000
+        },
+        {
+          "op_type": 1,
+          "aname": "book_id",
+          "num": 215000
+        }
+      ]
+    }
+  ]
+}
