@@ -1,0 +1,1 @@
+go run /Users/wukunyao/Documents/GitHub/iddb/src/iddb/main.go
