@@ -1,0 +1,7 @@
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/edit_cache.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/greeter_async_client2.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/greeter_async_server.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/greeter_async_client.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/greeter_server.dir
+/mnt/d/ddbms/helloworld/cmake/build/CMakeFiles/greeter_client.dir

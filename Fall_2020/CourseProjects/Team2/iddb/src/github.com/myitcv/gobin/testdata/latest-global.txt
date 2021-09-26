@@ -1,0 +1,21 @@
+# Install specific version
+gobin github.com/gobin-testrepos/simple-main@v1.0.0
+[!windows] stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.0.0 to \E'${WORK@R}\Q/gopath/bin/simple-main\E'$'
+[windows]  stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.0.0 to \E'${WORK@R}\Q\gopath\bin\simple-main.exe\E'$'
+! stderr .+
+
+# Verify we get that same version back via latest...
+# without having to hit the network
+env PREVGOPROXY=$GOPROXY
+env GOPROXY=
+gobin -nonet github.com/gobin-testrepos/simple-main@latest
+[!windows] stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.0.0 to \E'${WORK@R}\Q/gopath/bin/simple-main\E'$'
+[windows]  stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.0.0 to \E'${WORK@R}\Q\gopath\bin\simple-main.exe\E'$'
+! stderr .+
+
+# Upgrade latest to verify we get the later version
+env GOPROXY=$PREVGOPROXY
+gobin -u github.com/gobin-testrepos/simple-main@latest
+[!windows] stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.1.0 to \E'${WORK@R}\Q/gopath/bin/simple-main\E'$'
+[windows]  stdout '^\QInstalled github.com/gobin-testrepos/simple-main@v1.1.0 to \E'${WORK@R}\Q\gopath\bin\simple-main.exe\E'$'
+! stderr .+

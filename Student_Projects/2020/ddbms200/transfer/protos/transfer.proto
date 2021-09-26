@@ -1,0 +1,62 @@
+syntax = "proto3";
+package transfer;
+service Transfer {
+    rpc L_I_D(Stmt1) returns (Reply) {}
+    rpc L_L(Stmt2) returns (Reply) {}
+    rpc L_S(Stmt2) returns (stream Chunk) {}
+    // rpc L_T_L(stream Chunk) returns (Reply) {}
+    rpc L_T_L(stream TMPFile) returns (Reply) {}
+    rpc D_S_E(MTree) returns (ETree) {}
+   
+}
+message Stmt1 {
+    string sql = 1;
+    int32 site = 2;
+}
+message Stmt2 {
+    string sql1 = 1;
+    string sql2 = 2;
+    int32 site = 3;
+}
+message Reply {
+    string done = 1;
+}
+message Chunk {
+    bytes buffer = 1;
+}
+message TMPFile {
+    Stmt1 cfg = 1;
+    Chunk chk = 2;
+}
+message MNode {
+    int32 id = 1;
+    repeated int32 child = 2;
+    int32 parent = 3;
+    string sqlstmt = 4;
+    int32 site = 5;
+}
+message MTree {
+    int32 treeid = 1;
+    int32 root = 2;
+    repeated MNode nodes = 3;
+}
+message ENode {
+    int32 nodeid = 1;
+    double timespend = 2;
+    uint32 volume = 3;
+    string res = 4;
+    repeated int32 child = 5;
+    int32 parent = 6;
+    int32 site = 7;
+}
+message ETree {
+    int32 treeid = 1;
+    int32 root = 2;
+    repeated ENode nodes = 3;
+}
+
+
+
+
+
+
