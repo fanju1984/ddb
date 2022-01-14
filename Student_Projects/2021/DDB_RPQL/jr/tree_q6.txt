@@ -1,0 +1,340 @@
+{id=0
+type=fragment
+parent=11
+children=[]
+tables=['Customer']
+site=china
+size=195000
+if_valid=True
+columns=['Customer.id', 'Customer.name']
+f_id=7
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=0
+}
+
+{id=1
+type=fragment
+parent=-1
+children=[]
+tables=['Customer']
+site=japan
+size=120000
+if_valid=False
+columns=['Customer.id', 'Customer.rank']
+f_id=8
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=1
+}
+
+{id=2
+type=fragment
+parent=6
+children=[]
+tables=['Orders']
+site=china
+size=166752
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=9
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=6
+}
+
+{id=3
+type=fragment
+parent=7
+children=[]
+tables=['Orders']
+site=england
+size=191148
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=10
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=7
+}
+
+{id=4
+type=fragment
+parent=8
+children=[]
+tables=['Orders']
+site=japan
+size=391272
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=11
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=8
+}
+
+{id=5
+type=fragment
+parent=9
+children=[]
+tables=['Orders']
+site=usa
+size=450828
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=12
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=9
+}
+
+{id=6
+type=projection
+parent=10
+children=[2]
+tables=['Orders']
+site=china
+size=111168
+if_valid=True
+columns=['Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Orders.quantity', 'Orders.customer_id']
+join=None
+top=None
+}
+
+{id=7
+type=projection
+parent=10
+children=[3]
+tables=['Orders']
+site=england
+size=127432
+if_valid=True
+columns=['Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Orders.quantity', 'Orders.customer_id']
+join=None
+top=None
+}
+
+{id=8
+type=projection
+parent=13
+children=[4]
+tables=['Orders']
+site=japan
+size=260848
+if_valid=True
+columns=['Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Orders.quantity', 'Orders.customer_id']
+join=None
+top=None
+}
+
+{id=9
+type=projection
+parent=16
+children=[5]
+tables=['Orders']
+site=usa
+size=300552
+if_valid=True
+columns=['Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Orders.quantity', 'Orders.customer_id']
+join=None
+top=None
+}
+
+{id=10
+type=union
+parent=11
+children=[7, 6]
+tables=[]
+site=china
+size=238600
+if_valid=True
+columns=['Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+
+{id=11
+type=join
+parent=12
+children=[0, 10]
+tables=[['Customer']]
+site=china
+size=433600
+if_valid=True
+columns=['Customer.id', 'Customer.name', 'Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Customer.id', 'Orders.customer_id']
+top=None
+}
+
+{id=12
+type=projection
+parent=19
+children=[11]
+tables=[['Customer']]
+site=china
+size=268419
+if_valid=True
+columns=['Customer.name', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Customer.name', 'Orders.quantity']
+join=None
+top=None
+}
+
+{id=13
+type=join
+parent=15
+children=[14, 8]
+tables=[['Customer', 'Orders']]
+site=japan
+size=455848
+if_valid=True
+columns=['Customer.id', 'Customer.name', 'Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Customer.id', 'Orders.customer_id']
+top=None
+}
+
+{id=14
+type=fragment
+parent=13
+children=[]
+tables=['Customer']
+site=china
+size=195000
+if_valid=True
+columns=['Customer.id', 'Customer.name']
+f_id=7
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=0
+}
+
+{id=15
+type=projection
+parent=19
+children=[13]
+tables=[['Customer', 'Orders']]
+site=japan
+size=282191
+if_valid=True
+columns=['Customer.name', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Customer.name', 'Orders.quantity']
+join=None
+top=None
+}
+
+{id=16
+type=join
+parent=18
+children=[17, 9]
+tables=[['Customer', 'Orders']]
+site=usa
+size=495552
+if_valid=True
+columns=['Customer.id', 'Customer.name', 'Orders.quantity', 'Orders.customer_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Customer.id', 'Orders.customer_id']
+top=None
+}
+
+{id=17
+type=fragment
+parent=16
+children=[]
+tables=['Customer']
+site=china
+size=195000
+if_valid=True
+columns=['Customer.id', 'Customer.name']
+f_id=7
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=0
+}
+
+{id=18
+type=projection
+parent=19
+children=[16]
+tables=[['Customer', 'Orders']]
+site=usa
+size=306770
+if_valid=True
+columns=['Customer.name', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Customer.name', 'Orders.quantity']
+join=None
+top=None
+}
+
+{id=19
+type=union
+parent=-1
+children=[12, 15, 18]
+tables=[]
+site=usa
+size=857380
+if_valid=True
+columns=['Customer.name', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+

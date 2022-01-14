@@ -1,0 +1,126 @@
+syntax = "proto3";
+package net;
+service NetService {
+  //test method
+  rpc Test(Data) returns (Data1){}
+  rpc Createtable(SQL) returns (Status){}
+  rpc Droptable(SQL) returns (Status){}
+  rpc Loaddata(LoadParams) returns (Status){}
+  rpc Insertdata(LoadParams) returns (DataReturn){}
+  rpc Deletedata(SQL) returns (DataReturn){}
+  rpc SimpleSelect(SQL) returns (SimpleSelectReturn){}
+  rpc Excute(SQLTree) returns (TableData) {}
+  rpc jr_grpc_test(para_jr_grpc_test) returns (ret_jr_grpc_test) {}
+  rpc grpc_dfs(para_grpc_dfs) returns (ret_grpc_dfs) {}
+  rpc start_jr(para_start_jr) returns (ret_start_jr) {}
+  rpc temp_GC(para_temp_GC) returns (ret_temp_GC) {}
+  rpc createdatabase(para_dbname) returns (dbres) {}
+  rpc dropdatabase1(para_dbname) returns (dbres) {}
+  rpc dropdatabase2(para_dbname) returns (dbres) {}
+  rpc dropdatabase3(para_dbname) returns (usedbres) {}
+  rpc usedatabase1(para_dbname) returns (dbres) {}
+  rpc usedatabase2(para_dbname) returns (dbres) {}
+  rpc usedatabase3(para_dbname) returns (usedbres) {}
+  rpc jr_exit(para_jr_exit) returns (ret_jr_exit) {}
+}
+
+message para_jr_exit {
+  string dbname = 1;
+}
+
+message ret_jr_exit {
+  string dbname = 1;
+}
+
+message para_dbname {
+  string dbname = 1;
+}
+
+message dbres {
+  string res = 1;
+}
+
+message usedbres {
+  string res = 1;
+  string ipportdb = 2;
+}
+
+message para_temp_GC {
+  string para = 1;
+}
+
+message ret_temp_GC {
+  string res = 1;
+}
+
+message para_start_jr {
+  string str_nodes = 1;
+}
+
+message ret_start_jr {
+  string res = 1;
+}
+
+message para_grpc_dfs {
+  int32 query_no = 1;
+  int32 node_no = 2;
+  string str_nodes = 3;
+}
+
+message ret_grpc_dfs {
+  int32 dfs_node_no = 1;
+  string str_columns = 2;
+  string str_values = 3;
+  int32 trans_vol = 4;
+}
+
+message para_jr_grpc_test {
+  int32 th = 1;
+  int32 site = 2;
+}
+
+message ret_jr_grpc_test {
+  string res = 1;
+}
+
+message Data {
+  string data = 1;
+}
+
+message Data1 {
+  string data = 1;
+}
+
+message LoadParams {
+  string table_name = 1;
+  string fragment_columns = 2;
+  bytes data = 3;
+}
+
+message DataReturn {
+  string status = 1;
+  bytes data = 2;
+}
+
+message SimpleSelectReturn {
+  string status = 1;
+  string key = 2;
+  bytes data = 3;
+}
+
+message SQL {
+  string sql = 1;
+}
+
+message Status {
+  string status = 1;
+}
+
+message SQLTree {
+  string sql = 1;
+  string sites = 2;
+}
+
+message TableData {
+  string table = 1;
+}
