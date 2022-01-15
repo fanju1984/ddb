@@ -1,0 +1,58 @@
+#include "network.h"
+#include "meta.h"
+
+// test etcd utils 
+int main(){
+    Node node_test(1, "q1 = q2", "q1 = q2", "x1", NODE_NOT_LEAF, false);
+    node_test.add_children("child1", "1");
+    Field field_test1("1", 1);
+    Field field_test2("2", 2);
+    std::vector<Field> fields;
+    fields.push_back(field_test1);
+    fields.push_back(field_test2);
+    FragmentMeta fragment_test(1, 1, 1, fields, false, field_test1, "1", "2");
+    nlohmann::json frag_json = fragment_test.convert_to_json();
+    std::cout << "test frag json: " << std::endl;
+    std::cout << frag_json.dump() << std::endl;
+    FragmentMeta frag_get(frag_json);
+    std::vector<FragmentMeta> fragments;
+    fragments.push_back(fragment_test);
+    TableMeta table_test("test", fragments, 1, fields, 1);
+    MemberMeta member_test("127.0.0.1", 1);
+    std::cout << "--------------------------------------" << std::endl;
+    std::cout << "test write kv from etcd and read kv from etcd" << std::endl;
+    std::string s1 = "1";
+    std::string s2 = "2";
+    write_kv_to_etcd(s1, s2);
+    std::cout << "write kv to etcd" << std::endl;
+    std::string value = read_kv_from_etcd(s1);
+    std::cout << "read kv 1:" << value << " from etcd" << std::endl;
+
+    std::cout << "--------------------------------------" << std::endl;
+    std::cout << "test write structure to etcd" << std::endl;
+    // nlohmann::json table_json = table_test.convert_to_json();
+    nlohmann::json field_json = field_test1.convert_to_json();
+    write_to_etcd("field.field1", field_json);
+    nlohmann::json field_get_json = nlohmann::json::parse(read_kv_from_etcd("field.field1"));
+    Field field_get(field_get_json);
+    std::cout << "read field from etcd:" << std::endl;
+    std::cout << "field_id: " << std::to_string(field_get.get_field_table_id()) << " field_name: " << field_get.get_field_name() << std::endl;
+    // std::cout << "read structure table.table1 from etcd:" << std::endl;
+    // std::cout << table_json.dump() << std::endl;
+    // TableMeta table_get(table_json);
+    // std::cout << "get table1 from json:" << std::endl;
+    // std::cout << "table name: " << table_get.get_table_name() << std::endl;
+    // std::cout << "table rows: " << std::to_string(table_get.get_table_rows()) << std::endl;
+    // std::cout << "table field name: " << table_get.get_table_fields().begin()->get_field_name() << std::endl;
+    nlohmann::json node_json = node_test.convert_to_json();
+    write_to_etcd("node.node1", node_json);
+    std::cout << "read structure node.node1 from etcd:" << std::endl;
+    nlohmann::json node_get_json = nlohmann::json::parse(read_kv_from_etcd("node.node1"));
+    std::cout << node_get_json.dump() << std::endl;
+    Node node_get(node_get_json);
+    std::cout << "get node1 from json:" << std::endl;
+    std::cout << "node join expr: " << node_get.get_join_predicate() << std::endl;
+    std::cout << "node select expr: " << node_get.get_select_predicate() << std::endl;
+
+    std::cout << "node child1: " << node_get.get_children().begin()->first << std::endl;
+}

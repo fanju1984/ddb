@@ -1,0 +1,58 @@
+syntax="proto2";
+option cc_generic_services = true;
+
+message NodeRequest{
+    optional string temp_table_name = 1;
+}
+
+message NodeResponse{
+    optional string table_fields = 1;
+    repeated string table_values = 2;
+}
+
+message ImportDataRequest{
+    optional string table_name = 1;
+    optional string table_fields = 2;
+    repeated string table_values = 3;
+}
+
+message ImportDataResponse{
+    optional string result = 1;
+}
+
+message DeleteTempTableRequest{
+    optional string temp_table_name = 1;
+}
+
+message DeleteTempTableResponse{
+    optional string result = 1;
+}
+
+message ExecuteNonQuerySQLRequest{
+    optional string sql_query = 1;
+}
+
+message ExecuteNonQuerySQLResponse{
+    optional string result = 1;
+}
+
+message ExecuteQuerySQLRequest{
+    optional string sql = 1;
+}
+
+message ExecuteQuerySQLResponse{
+    optional string table_fields = 1;
+    repeated string table_values = 2;
+}
+
+service sql_service{
+    rpc RequestNode(NodeRequest) returns (NodeResponse);
+
+    rpc ImportData(ImportDataRequest) returns (ImportDataResponse);
+
+    rpc DeleteTable(DeleteTempTableRequest) returns (DeleteTempTableResponse);
+
+    rpc ExecuteNonQuerySQL(ExecuteNonQuerySQLRequest) returns (ExecuteNonQuerySQLResponse);
+
+    rpc ExecuteQuerySQL(ExecuteQuerySQLRequest) returns (ExecuteQuerySQLResponse);
+}
