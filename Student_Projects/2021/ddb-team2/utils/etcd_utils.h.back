@@ -1,0 +1,23 @@
+/* etcd_utils.hpp
+
+    Some functions helping opertions on etcd
+
+    Created by khaiwang
+
+    2021/11/10
+*/
+
+#include <string>
+#include <map>
+#include "json.hpp"
+#include "base64.h"
+#include "brpc/channel.h"
+
+
+int write_kv_to_etcd(const std::string &key, const std::string &value);
+int write_map_to_etcd(const std::map<std::string, std::string> &map);
+std::string read_kv_from_etcd(const std::string &key);
+int delete_kv_from_etcd(const std::string &key);
+int write_to_etcd(const std::string &key, const nlohmann::json &value);
+int delete_structure_from_etcd(const std::string &key);
+nlohmann::json read_from_etcd(const std::string &key);
