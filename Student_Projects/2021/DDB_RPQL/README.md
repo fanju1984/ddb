@@ -1,5 +1,7 @@
 # DDB_RPQL
 This is the distributed database course project by the group **Qinliang Xue, Jiawei Liu, Peng Wang**
+# URL
+https://github.com/XueQinliang/DDB_RPQL
 ## How to run
 1. before start the ddb, you should cd to the root of project, run `bash net/run.sh`
 
@@ -74,4 +76,10 @@ request and response format are defined in net.proto
 - By grpc channel to get data, you should use try except because some servers may be inactive.
 - etcd use Etcd_S, means safe etcd that with try except.
 - db use Conndb, a good class for mysql.
+
+The following people contributed to `RPQL`.
+
+- Qinliang Xue([@XueQinliang](https://github.com/XueQinliang))
+- Peng Wang([@LisaWang0306](https://github.com/LisaWang0306))
+- Jiawei Liu([@rucjrliu](https://github.com/rucjrliu))
 
