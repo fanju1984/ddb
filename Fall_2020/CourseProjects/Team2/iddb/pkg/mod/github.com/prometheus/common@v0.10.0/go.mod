@@ -16,7 +16,7 @@ require (
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980
 	golang.org/x/sys v0.0.0-20190422165155-953cdadca894
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
-	gopkg.in/yaml.v2 v2.2.4
+	gopkg.in/yaml.v2 v2.2.8
 )
 
 go 1.11
