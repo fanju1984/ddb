@@ -1,0 +1,10 @@
+{
+    "etcdserverlist": [
+        "10.77.70.61:2379",
+        "10.77.70.62:2379",
+        "10.77.70.63:2379"
+    ],
+    "etcdport": 2379,
+    "mysqluser": "root",
+    "mysqlpassword": "Ddb123$%^"
+}

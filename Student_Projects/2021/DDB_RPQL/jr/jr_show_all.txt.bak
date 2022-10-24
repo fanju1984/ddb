@@ -1,0 +1,68 @@
+/attrinfo/Book.copies b"{'attr': 'Book.copies', 'type': 'U', 'numbers': ['0', '10000', '50000']}"
+/attrinfo/Book.id b"{'attr': 'Book.id', 'type': 'U', 'numbers': ['200001', '250000', '50000']}"
+/attrinfo/Customer.id b"{'attr': 'Customer.id', 'type': 'U', 'numbers': ['300001', '315000', '15000']}"
+/attrinfo/Customer.rank b"{'attr': 'Customer.rank', 'type': 'P', 'numbers': ['1', '0.4', '2', '0.3', '3', '0.3']}"
+/attrinfo/Orders.quantity b"{'attr': 'Orders.quantity', 'type': 'N', 'numbers': ['3', '2', '1', '12']}"
+/attrinfo/Publisher.id b"{'attr': 'Publisher.id', 'type': 'U', 'numbers': ['100001', '105000', '5000']}"
+/attrinfo/Publisher.nation b'{\'attr\': \'Publisher.nation\', \'type\': \'P\', \'numbers\': ["\'USA\'", \'0.5\', "\'PRC\'", \'0.5\']}'
+/site/cuba/fragment/Orders b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id >= 307000 and book_id >= 215000', 'sitename': 'cuba', 'site': '10.77.70.63:8883:db1', 'size': 0}"
+/site/cuba/fragment/Publisher b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id >= 104000 and nation=\'USA\'", \'sitename\': \'cuba\', \'site\': \'10.77.70.63:8883:db1\', \'size\': 0}'
+/site/england/fragment/Book b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id >= 210000', 'sitename': 'england', 'site': '10.77.70.62:8883:db1', 'size': 0}"
+/site/england/fragment/Orders b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id >= 307000 and book_id < 215000', 'sitename': 'england', 'site': '10.77.70.62:8883:db1', 'size': 0}"
+/site/england/fragment/Publisher b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id >= 104000 and nation=\'PRC\'", \'sitename\': \'england\', \'site\': \'10.77.70.62:8883:db1\', \'size\': 0}'
+/site/korea/fragment/Book b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id >= 205000 and id < 210000', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/site/korea/fragment/Customer b"{'columns': ['id', 'rank'], 'conditions': '', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/site/korea/fragment/Orders b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id < 307000 and book_id >= 215000', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/site/korea/fragment/Publisher b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id < 104000 and nation=\'USA\'", \'sitename\': \'korea\', \'site\': \'10.77.70.61:8885:db2\', \'size\': 0}'
+/site/prc/fragment/Book b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id < 205000', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/site/prc/fragment/Customer b"{'columns': ['id', 'name'], 'conditions': '', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/site/prc/fragment/Orders b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id < 307000 and book_id < 215000', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/site/prc/fragment/Publisher b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id < 104000 and nation=\'PRC\'", \'sitename\': \'prc\', \'site\': \'10.77.70.61:8883:db1\', \'size\': 0}'
+/table b"['Publisher', 'Book', 'Customer', 'Orders']"
+/table/Book/columns b"[['id', 'int', 'key'], ['title', 'char(100)'], ['authors', 'char(200)'], ['publisher_id', 'int'], ['copies', 'int']]"
+/table/Book/columnsize/authors b'9.01262468438289'
+/table/Book/columnsize/copies b'4'
+/table/Book/columnsize/id b'4'
+/table/Book/columnsize/publisher_id b'4'
+/table/Book/columnsize/title b'12.0'
+/table/Book/fragment/england b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id >= 210000', 'sitename': 'england', 'site': '10.77.70.62:8883:db1', 'size': 0}"
+/table/Book/fragment/korea b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id >= 205000 and id < 210000', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/table/Book/fragment/prc b"{'columns': ['id', 'title', 'authors', 'publisher_id', 'copies'], 'conditions': 'id < 205000', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/table/Book/lenfragment/england b'40001'
+/table/Book/lenfragment/korea b'5000'
+/table/Book/lenfragment/prc b'4999'
+/table/Customer/columns b"[['id', 'int', 'key'], ['name', 'char(25)'], ['rank', 'int']]"
+/table/Customer/columnsize/id b'4'
+/table/Customer/columnsize/name b'9.0168'
+/table/Customer/columnsize/rank b'4'
+/table/Customer/fragment/korea b"{'columns': ['id', 'rank'], 'conditions': '', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/table/Customer/fragment/prc b"{'columns': ['id', 'name'], 'conditions': '', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/table/Customer/lenfragment/korea b'15000'
+/table/Customer/lenfragment/prc b'15000'
+/table/Orders/columns b"[['customer_id', 'int'], ['book_id', 'int'], ['quantity', 'int']]"
+/table/Orders/columnsize/book_id b'4'
+/table/Orders/columnsize/customer_id b'4'
+/table/Orders/columnsize/quantity b'4'
+/table/Orders/fragment/cuba b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id >= 307000 and book_id >= 215000', 'sitename': 'cuba', 'site': '10.77.70.63:8883:db1', 'size': 0}"
+/table/Orders/fragment/england b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id >= 307000 and book_id < 215000', 'sitename': 'england', 'site': '10.77.70.62:8883:db1', 'size': 0}"
+/table/Orders/fragment/korea b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id < 307000 and book_id >= 215000', 'sitename': 'korea', 'site': '10.77.70.61:8885:db2', 'size': 0}"
+/table/Orders/fragment/prc b"{'columns': ['customer_id', 'book_id', 'quantity'], 'conditions': 'customer_id < 307000 and book_id < 215000', 'sitename': 'prc', 'site': '10.77.70.61:8883:db1', 'size': 0}"
+/table/Orders/lenfragment/cuba b'37569'
+/table/Orders/lenfragment/england b'15929'
+/table/Orders/lenfragment/korea b'32606'
+/table/Orders/lenfragment/prc b'13896'
+/table/Publisher/columns b"[['id', 'int', 'key'], ['name', 'char(100)'], ['nation', 'char(3)']]"
+/table/Publisher/columnsize/id b'4'
+/table/Publisher/columnsize/name b'17.0'
+/table/Publisher/columnsize/nation b'3.0'
+/table/Publisher/fragment/cuba b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id >= 104000 and nation=\'USA\'", \'sitename\': \'cuba\', \'site\': \'10.77.70.63:8883:db1\', \'size\': 0}'
+/table/Publisher/fragment/england b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id >= 104000 and nation=\'PRC\'", \'sitename\': \'england\', \'site\': \'10.77.70.62:8883:db1\', \'size\': 0}'
+/table/Publisher/fragment/korea b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id < 104000 and nation=\'USA\'", \'sitename\': \'korea\', \'site\': \'10.77.70.61:8885:db2\', \'size\': 0}'
+/table/Publisher/fragment/prc b'{\'columns\': [\'id\', \'name\', \'nation\'], \'conditions\': "id < 104000 and nation=\'PRC\'", \'sitename\': \'prc\', \'site\': \'10.77.70.61:8883:db1\', \'size\': 0}'
+/table/Publisher/lenfragment/cuba b'471'
+/table/Publisher/lenfragment/england b'530'
+/table/Publisher/lenfragment/korea b'1972'
+/table/Publisher/lenfragment/prc b'2027'
+/tree b'\x80\x04\x95\xdb\x01\x00\x00\x00\x00\x00\x00]\x94(\x8c\nstructures\x94\x8c\x04Node\x94\x93\x94)\x81\x94}\x94(\x8c\x02id\x94K\x00\x8c\x04type\x94\x8c\x08fragment\x94\x8c\x06parent\x94K\x02\x8c\x08children\x94]\x94\x8c\x06tables\x94]\x94\x8c\x08Customer\x94a\x8c\x04site\x94\x8c\x05korea\x94\x8c\x04size\x94J\xc0\xd4\x01\x00\x8c\x08if_valid\x94\x88\x8c\x07columns\x94]\x94(\x8c\x0bCustomer.id\x94\x8c\rCustomer.rank\x94e\x8c\x04f_id\x94K\x07\x8c\x06f_name\x94\x8c\x08Customer\x94\x8c\x0cselect_condi\x94N\x8c\nprojection\x94N\x8c\x04join\x94N\x8c\x03top\x94K\x02ubh\x03)\x81\x94}\x94(h\x06K\x01h\x07h\x08h\tK\x02h\n]\x94h\x0c]\x94h\x0eah\x0f\x8c\x03prc\x94h\x11J\xb8\xf9\x02\x00h\x12\x88h\x13]\x94(\x8c\x0bCustomer.id\x94\x8c\rCustomer.name\x94eh\x17K\x08h\x18h\x19h\x1aNh\x1bNh\x1cNh\x1dK\x02ubh\x03)\x81\x94}\x94(h\x06K\x02h\x07h\x1ch\tJ\xff\xff\xff\xffh\n]\x94(K\x00K\x01eh\x0ch\rh\x0fh"h\x11J\x18\xe4\x03\x00h\x12\x88h\x13]\x94(h%h\x15h\x16eh\x17Nh\x18Nh\x1aNh\x1bNh\x1c]\x94(\x8c\x0bCustomer.id\x94h+eh\x1dNube.'
+DB b"['test3', 'test4', 'test5', 'test6', 'test8', 'test9', 'test11', 'test12']"
+SITES b"['10.77.70.61:8885:None', '10.77.70.61:8883:None', '10.77.70.63:8883:None', '10.77.70.62:8883:None']"

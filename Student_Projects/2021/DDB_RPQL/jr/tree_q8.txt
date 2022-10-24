@@ -1,0 +1,595 @@
+{id=0
+type=fragment
+parent=13
+children=[]
+tables=['Customer']
+site=1
+size=195000
+if_valid=True
+columns=['Customer.id', 'Customer.name']
+f_id=7
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=13
+}
+
+{id=1
+type=fragment
+parent=-1
+children=[]
+tables=['Customer']
+site=2
+size=120000
+if_valid=False
+columns=['Customer.id', 'Customer.rank']
+f_id=8
+f_name=Customer
+select_condi=None
+projection=None
+join=None
+top=1
+}
+
+{id=2
+type=fragment
+parent=14
+children=[]
+tables=['Book']
+site=1
+size=164967
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=4
+f_name=Book
+select_condi=None
+projection=None
+join=None
+top=15
+}
+
+{id=3
+type=fragment
+parent=16
+children=[]
+tables=['Book']
+site=2
+size=165000
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=5
+f_name=Book
+select_condi=None
+projection=None
+join=None
+top=17
+}
+
+{id=4
+type=fragment
+parent=18
+children=[]
+tables=['Book']
+site=3
+size=1320033
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=6
+f_name=Book
+select_condi=None
+projection=None
+join=None
+top=19
+}
+
+{id=5
+type=fragment
+parent=-1
+children=[]
+tables=['Orders']
+site=1
+size=166752
+if_valid=False
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=9
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=5
+}
+
+{id=6
+type=fragment
+parent=-1
+children=[]
+tables=['Orders']
+site=2
+size=391272
+if_valid=False
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=10
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=6
+}
+
+{id=7
+type=fragment
+parent=20
+children=[]
+tables=['Orders']
+site=3
+size=191148
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=11
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=20
+}
+
+{id=8
+type=fragment
+parent=21
+children=[]
+tables=['Orders']
+site=4
+size=450828
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=12
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=21
+}
+
+{id=9
+type=fragment
+parent=22
+children=[]
+tables=['Publisher']
+site=1
+size=48648
+if_valid=True
+columns=['Publisher.id', 'Publisher.name', 'Publisher.nation']
+f_id=0
+f_name=Publisher
+select_condi=None
+projection=None
+join=None
+top=22
+}
+
+{id=10
+type=fragment
+parent=-1
+children=[]
+tables=['Publisher']
+site=2
+size=47328
+if_valid=False
+columns=['Publisher.id', 'Publisher.name', 'Publisher.nation']
+f_id=1
+f_name=Publisher
+select_condi=None
+projection=None
+join=None
+top=10
+}
+
+{id=11
+type=fragment
+parent=23
+children=[]
+tables=['Publisher']
+site=3
+size=12720
+if_valid=True
+columns=['Publisher.id', 'Publisher.name', 'Publisher.nation']
+f_id=2
+f_name=Publisher
+select_condi=None
+projection=None
+join=None
+top=23
+}
+
+{id=12
+type=fragment
+parent=-1
+children=[]
+tables=['Publisher']
+site=4
+size=11304
+if_valid=False
+columns=['Publisher.id', 'Publisher.name', 'Publisher.nation']
+f_id=3
+f_name=Publisher
+select_condi=None
+projection=None
+join=None
+top=12
+}
+
+{id=13
+type=select
+parent=32
+children=[0]
+tables=['Customer']
+site=1
+size=91006
+if_valid=True
+columns=['Customer.id', 'Customer.name']
+f_id=None
+f_name=None
+select_condi=['Customer.id', '>', '308000']
+projection=None
+join=None
+top=None
+}
+
+{id=14
+type=select
+parent=15
+children=[2]
+tables=['Book']
+site=1
+size=163317
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=None
+f_name=None
+select_condi=['Book.copies', '>', '100']
+projection=None
+join=None
+top=None
+}
+
+{id=15
+type=projection
+parent=26
+children=[14]
+tables=['Book']
+site=1
+size=98980
+if_valid=True
+columns=['Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Book.title', 'Book.id', 'Book.publisher_id']
+join=None
+top=None
+}
+
+{id=16
+type=select
+parent=17
+children=[3]
+tables=['Book']
+site=2
+size=163350
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=None
+f_name=None
+select_condi=['Book.copies', '>', '100']
+projection=None
+join=None
+top=None
+}
+
+{id=17
+type=projection
+parent=26
+children=[16]
+tables=['Book']
+site=2
+size=99000
+if_valid=True
+columns=['Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Book.title', 'Book.id', 'Book.publisher_id']
+join=None
+top=None
+}
+
+{id=18
+type=select
+parent=19
+children=[4]
+tables=['Book']
+site=3
+size=1306832
+if_valid=True
+columns=['Book.id', 'Book.title', 'Book.authors', 'Book.publisher_id', 'Book.copies']
+f_id=None
+f_name=None
+select_condi=['Book.copies', '>', '100']
+projection=None
+join=None
+top=None
+}
+
+{id=19
+type=projection
+parent=25
+children=[18]
+tables=['Book']
+site=3
+size=792019
+if_valid=True
+columns=['Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Book.title', 'Book.id', 'Book.publisher_id']
+join=None
+top=None
+}
+
+{id=20
+type=select
+parent=24
+children=[7]
+tables=['Orders']
+site=3
+size=170581
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=['Orders.quantity', '>', '1']
+projection=None
+join=None
+top=None
+}
+
+{id=21
+type=select
+parent=24
+children=[8]
+tables=['Orders']
+site=4
+size=402321
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=['Orders.quantity', '>', '1']
+projection=None
+join=None
+top=None
+}
+
+{id=22
+type=projection
+parent=31
+children=[9]
+tables=['Publisher']
+site=1
+size=42567
+if_valid=True
+columns=['Publisher.name', 'Publisher.id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Publisher.name', 'Publisher.id']
+join=None
+top=None
+}
+
+{id=23
+type=projection
+parent=31
+children=[11]
+tables=['Publisher']
+site=3
+size=11130
+if_valid=True
+columns=['Publisher.name', 'Publisher.id']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Publisher.name', 'Publisher.id']
+join=None
+top=None
+}
+
+{id=24
+type=union
+parent=25
+children=[20, 21]
+tables=[]
+site=3
+size=572902
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+
+{id=25
+type=join
+parent=30
+children=[24, 19]
+tables=[['Book']]
+site=3
+size=1364921
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity', 'Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Orders.book_id', 'Book.id']
+top=None
+}
+
+{id=26
+type=union
+parent=27
+children=[17, 15]
+tables=[]
+site=3
+size=197980
+if_valid=True
+columns=['Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+
+{id=27
+type=join
+parent=30
+children=[28, 26]
+tables=[['Orders']]
+site=3
+size=368561
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity', 'Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Orders.book_id', 'Book.id']
+top=None
+}
+
+{id=28
+type=select
+parent=27
+children=[29]
+tables=['Orders']
+site=3
+size=170581
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=['Orders.quantity', '>', '1']
+projection=None
+join=None
+top=None
+}
+
+{id=29
+type=fragment
+parent=28
+children=[]
+tables=['Orders']
+site=3
+size=191148
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity']
+f_id=11
+f_name=Orders
+select_condi=None
+projection=None
+join=None
+top=20
+}
+
+{id=30
+type=union
+parent=32
+children=[25, 27]
+tables=[]
+site=3
+size=1733482
+if_valid=True
+columns=['Orders.customer_id', 'Orders.book_id', 'Orders.quantity', 'Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+
+{id=31
+type=union
+parent=33
+children=[23, 22]
+tables=[]
+site=3
+size=53697
+if_valid=True
+columns=['Publisher.name', 'Publisher.id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=None
+top=None
+}
+
+{id=32
+type=join
+parent=33
+children=[13, 30]
+tables=[['Customer']]
+site=3
+size=1824488
+if_valid=True
+columns=['Customer.id', 'Customer.name', 'Orders.customer_id', 'Orders.book_id', 'Orders.quantity', 'Book.title', 'Book.id', 'Book.publisher_id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Customer.id', 'Orders.customer_id']
+top=None
+}
+
+{id=33
+type=join
+parent=34
+children=[32, 31]
+tables=[[['Customer']]]
+site=3
+size=1878185
+if_valid=True
+columns=['Customer.id', 'Customer.name', 'Orders.customer_id', 'Orders.book_id', 'Orders.quantity', 'Book.title', 'Book.id', 'Book.publisher_id', 'Publisher.name', 'Publisher.id']
+f_id=None
+f_name=None
+select_condi=None
+projection=None
+join=['Book.publisher_id', 'Publisher.id']
+top=None
+}
+
+{id=34
+type=projection
+parent=-1
+children=[33]
+tables=[[['Customer']]]
+site=3
+size=1195208
+if_valid=True
+columns=['Customer.name', 'Book.title', 'Publisher.name', 'Orders.quantity']
+f_id=None
+f_name=None
+select_condi=None
+projection=['Customer.name', 'Book.title', 'Publisher.name', 'Orders.quantity']
+join=None
+top=None
+}
+
