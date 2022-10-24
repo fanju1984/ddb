@@ -12,21 +12,26 @@ import asyncio
 from grpc import aio
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+try:
+    import gnureadline as readline
+except ImportError:
+    import readline
+
 sys.path.append("../")
-from meta import *
+
 from utils import *
 from net import net_pb2, net_pb2_grpc
 from etcd.etcd import Etcd_S
 from jr.jr_execute_grpc import update_sitename
 
-IP1 = "10.46.234.251"
-IP2 = "10.46.234.251"
+# IP1 = "10.46.234.251"
+# IP2 = "10.46.234.251"
 
-PORT1 = "8883"
-PORT2 = "8885"
+# PORT1 = "8883"
+# PORT2 = "8885"
 
-_HOST = "localhost"
-_PORT = "8883"
+# _HOST = "localhost"
+# _PORT = "8883"
 
 _DB = "None"
 
@@ -36,15 +41,15 @@ etcd = Etcd_S(host=getip(), port=2379)
 # conn1 = grpc.insecure_channel("localhost:8883")
 # client1 = net_pb2_grpc.NetServiceStub(channel=conn1)
 
-publisher_meta = table_meta(
-    "Publisher",
-    [
-        field_meta("id", "int"),
-        field_meta("name", "char(100)"),
-        field_meta("nation", "char(3)"),
-    ],
-    [fragment_meta(IP1, PORT1, "db1"), fragment_meta(IP2, PORT2, "db2")],
-)
+# publisher_meta = table_meta(
+#    "Publisher",
+#    [
+#        field_meta("id", "int"),
+#        field_meta("name", "char(100)"),
+#        field_meta("nation", "char(3)"),
+#    ],
+#    [fragment_meta(IP1, PORT1, "db1"), fragment_meta(IP2, PORT2, "db2")],
+# )
 
 
 def run():
@@ -70,11 +75,11 @@ def run():
         text = input("({})> ".format(_DB))
         if text == "quit" or text == "exit":
             break
-        if re.match("create table", text):        #加个统计信息
+        if re.match("create table", text):  # 加个统计信息
             # 写入etcd
             table_name = re.findall("create table (.*?)\s*\(.*?", text)[0]
             table = etcd.get("/table")[0]
-            #print('table',table)
+            # print('table',table)
             if table in [b"", b"[]", b"{}", None]:
                 table = [table_name]
             else:
@@ -121,12 +126,14 @@ def run():
                         conn = grpc.insecure_channel(ip + ":" + port)
                         client = net_pb2_grpc.NetServiceStub(channel=conn)
                         # print("start")
-                        response = client.createdatabase(net_pb2.para_dbname(dbname=dbname))
+                        response = client.createdatabase(
+                            net_pb2.para_dbname(dbname=dbname)
+                        )
                         if response.res == "yes":
                             print("create database on {} successfully!".format(name))
                     except:
                         print(f"{ip}:{port} cannot be connected", time.asctime())
-                
+
                 # 写db
                 if dblist == []:
                     dblist = [dbname]
@@ -137,13 +144,12 @@ def run():
                     # print("[Test] DB", dblist)
                     etcd.put("DB", str(dblist))
 
-
             else:
                 print("parse error!")
                 continue
-            
-        elif re.match("drop", text):
-            dbname = re.findall("drop\s+(.*?);", text)
+
+        elif re.match("drop database", text):
+            dbname = re.findall("drop\s+database\s+(.*?);", text)
             sitenames = eval(etcd.get("sitenames")[0])
             sites = eval(etcd.get("SITES")[0])
             newSITES = []
@@ -160,7 +166,9 @@ def run():
                         client = net_pb2_grpc.NetServiceStub(channel=conn)
                         # print("start")
                         print(dbname)
-                        response = client.dropdatabase1(net_pb2.para_dbname(dbname=dbname))
+                        response = client.dropdatabase1(
+                            net_pb2.para_dbname(dbname=dbname)
+                        )
                         print(response.res)
                     except:
                         print(f"{ip}:{port} cannot be connected", time.asctime())
@@ -172,7 +180,9 @@ def run():
                         client = net_pb2_grpc.NetServiceStub(channel=conn)
                         # print("start")
                         print(dbname)
-                        response = client.dropdatabase2(net_pb2.para_dbname(dbname=dbname))
+                        response = client.dropdatabase2(
+                            net_pb2.para_dbname(dbname=dbname)
+                        )
                         print(response.res)
                     except:
                         print(f"{ip}:{port} cannot be connected", time.asctime())
@@ -184,7 +194,9 @@ def run():
                         client = net_pb2_grpc.NetServiceStub(channel=conn)
                         # print("start")
                         print(dbname)
-                        response = client.dropdatabase3(net_pb2.para_dbname(dbname=dbname))
+                        response = client.dropdatabase3(
+                            net_pb2.para_dbname(dbname=dbname)
+                        )
                         ipportdb = response.ipportdb
                         print(response.res)
                         print(ipportdb)
@@ -195,7 +207,7 @@ def run():
                             newsitenames[name] = ipportdb
                     except:
                         print(f"{ip}:{port} cannot be connected", time.asctime())
-                        
+
                 if _DB == dbname:
                     _DB = "None"
                 rplace = True
@@ -245,7 +257,7 @@ def run():
                 continue
             if len(dbname) == 1:
                 dbname = dbname[0]
-                if not re.match("[A-Za-z]+[0-9]*$", dbname):
+                if not re.match("[A-Za-z_]+[0-9]*$", dbname):
                     print("perror")
                     continue
                 if dbname == "None":
@@ -264,20 +276,9 @@ def run():
                             client = net_pb2_grpc.NetServiceStub(channel=conn)
                             # print("start")
                             print("send", dbname)
-                            response = client.usedatabase1(net_pb2.para_dbname(dbname=dbname))
-                            print(response.res)
-                        except:
-                            print(f"{ip}:{port} cannot be connected", time.asctime())
-                        
-                    for name in sitenames:
-                        ip, port, db = sitenames[name].split(":")
-                        print(ip, port, db)
-                        try:
-                            conn = grpc.insecure_channel(ip + ":" + port)
-                            client = net_pb2_grpc.NetServiceStub(channel=conn)
-                            # print("start")
-                            print("send", dbname)
-                            response = client.usedatabase2(net_pb2.para_dbname(dbname=dbname))
+                            response = client.usedatabase1(
+                                net_pb2.para_dbname(dbname=dbname)
+                            )
                             print(response.res)
                         except:
                             print(f"{ip}:{port} cannot be connected", time.asctime())
@@ -290,7 +291,24 @@ def run():
                             client = net_pb2_grpc.NetServiceStub(channel=conn)
                             # print("start")
                             print("send", dbname)
-                            response = client.usedatabase3(net_pb2.para_dbname(dbname=dbname))
+                            response = client.usedatabase2(
+                                net_pb2.para_dbname(dbname=dbname)
+                            )
+                            print(response.res)
+                        except:
+                            print(f"{ip}:{port} cannot be connected", time.asctime())
+
+                    for name in sitenames:
+                        ip, port, db = sitenames[name].split(":")
+                        print(ip, port, db)
+                        try:
+                            conn = grpc.insecure_channel(ip + ":" + port)
+                            client = net_pb2_grpc.NetServiceStub(channel=conn)
+                            # print("start")
+                            print("send", dbname)
+                            response = client.usedatabase3(
+                                net_pb2.para_dbname(dbname=dbname)
+                            )
                             ipportdb = response.ipportdb
                             print(response.res)
                             print(ipportdb)
@@ -301,7 +319,7 @@ def run():
                                 newsitenames[name] = ipportdb
                         except:
                             print(f"{ip}:{port} cannot be connected", time.asctime())
-                            
+
                     print("add newsites:", newSITES)
                     rplace = True
                     for i in newSITES:
@@ -337,11 +355,11 @@ def run():
                     pass
                 print(ip + ":" + port + ": exit finished", dbname)
                 exit(0)
-        
-        elif re.match("clean", text): # 清除etcd
+
+        elif re.match("clean", text):  # 清除etcd
             etcd.delete_prefix("/attrinfo")
             etcd.delete_prefix("/site")
-            etcd.delete_prefix("/table") # 清空现有
+            etcd.delete_prefix("/table")  # 清空现有
 
         elif re.match("show databases", text):
             db = etcd.get("DB")[0]
@@ -350,17 +368,22 @@ def run():
             else:
                 for i in eval(db):
                     print(i)
-            
+
         elif re.match("show tables", text):
-            table = eval(etcd.get("/table")[0])
-            print('tables:')
+            try:
+                table = eval(etcd.get("/table")[0])
+            except:
+                print("tables:\nNone")
+                continue
+            print("tables:")
             for i in table:
                 print(i)
                 if re.findall("with\s+fragment", text):
-                    fragments = etcd.get_prefix("/table/"+i+"/fragment")
+                    fragments = etcd.get_prefix("/table/" + i + "/fragment")
                     for f in fragments:
                         fragment = eval(f[0])
                         import json
+
                         print(json.dumps(fragment, indent=4, sort_keys=False))
 
         elif re.match("show sites", text):
@@ -371,15 +394,16 @@ def run():
                 print("None")
                 continue
             print(sitenames)
-            print('sites:')
+            print("sites:")
             for i in sitenames:
                 ip, port, db = sitenames[i].split(":")
                 print(i, "ip:", ip, "port:", port, "db:", db)
                 if re.findall("with\s+fragment", text):
-                    fragments = etcd.get_prefix("/site/"+i+"/fragment")
+                    fragments = etcd.get_prefix("/site/" + i + "/fragment")
                     for f in fragments:
                         fragment = eval(f[0])
                         import json
+
                         print(json.dumps(fragment, indent=4, sort_keys=False))
 
         elif re.match("create fragment", text):
@@ -392,7 +416,7 @@ def run():
                 conditions = ""
             else:
                 conditions = conditions[0]
-            site = re.findall("\s+on\s+site\s*=\s*[\'\"](.*?)[\'\"]\s*;", text)[0]
+            site = re.findall("\s+on\s+site\s*=\s*['\"](.*?)['\"]\s*;", text)[0]
             # print(site)
             table_name = tokens[0]
             columnlist = [i.strip() for i in tokens[1].split(",")]
@@ -411,12 +435,16 @@ def run():
                 print("this site is not in the cluster")
                 continue
             if columnlist[0] == "*":
-                columnlist = [
-                    i[0]
-                    for i in eval(
-                        etcd.get("/table/" + table_name + "/columns")[0].decode()
-                    )
-                ]
+                try:
+                    columnlist = [
+                        i[0]
+                        for i in eval(
+                            etcd.get("/table/" + table_name + "/columns")[0].decode()
+                        )
+                    ]
+                except:
+                    print("this table is not in database")
+                    continue
             fragment = {
                 "columns": columnlist,
                 "conditions": conditions,
@@ -444,9 +472,13 @@ def run():
             print(this_sitename, ip, port)
             # ip = "localhost"
             # port = "8883"
-            
-            etcd.put("/table/" + table_name + "/fragment/" + this_sitename, str(fragment))
-            etcd.put("/site/" + this_sitename + "/fragment/"+ table_name, str(fragment))
+
+            etcd.put(
+                "/table/" + table_name + "/fragment/" + this_sitename, str(fragment)
+            )
+            etcd.put(
+                "/site/" + this_sitename + "/fragment/" + table_name, str(fragment)
+            )
             # num = etcd.get("/table/" + table_name + "/fragmentnum")[0]
             # etcd.put("/table/" + table_name + "/fragmentnum", str(int(num) + 1))
             try:
@@ -457,7 +489,6 @@ def run():
                 print(response.status)
             except:
                 print(f"{ip}:{port} cannot be connected", time.asctime())
-            
 
         elif re.match("load data infile", text):
             t1 = time.time()
@@ -578,13 +609,17 @@ def run():
                     )
                     return (response.status, ip, port)
                 except:
-                    print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                    print(
+                        f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                        time.asctime(),
+                    )
                     return ("something is wrong", ip, port)
+
             sitenames = eval(etcd.get("sitenames")[0])
             namesites = {}
             for i in sitenames:
                 ip, port, db = sitenames[i].split(":")
-                namesites[ip+":"+port] = i
+                namesites[ip + ":" + port] = i
 
             # loop = asyncio.get_event_loop()
             tasks = []
@@ -593,19 +628,26 @@ def run():
                     subdata = data[i]
                     len_of_fragment = len(subdata)
                     # reverse_sitenames = {v:k for k,v in sitenames.items()}
-                    
-                    etcd.put("/table/{}/lenfragment/{}".format(table_name, fragment[i]["sitename"]), str(len_of_fragment))
+
+                    etcd.put(
+                        "/table/{}/lenfragment/{}".format(
+                            table_name, fragment[i]["sitename"]
+                        ),
+                        str(len_of_fragment),
+                    )
                     bytedata = pickle.dumps(subdata)
                     ip, port, db = fragment[i]["site"].split(":")
                     print("start", i)
                     # tasks.append(tmp(i, ip, port, table_name, fragment_columns, bytedata))
-                    task = t.submit(tmp, i, ip, port, table_name, fragment_columns, bytedata)
+                    task = t.submit(
+                        tmp, i, ip, port, table_name, fragment_columns, bytedata
+                    )
                     tasks.append(task)
-                
+
                 for future in as_completed(tasks):
                     message, ip, port = future.result()
-                    if ip+":"+port in namesites:
-                        sitename = namesites[ip+":"+port]
+                    if ip + ":" + port in namesites:
+                        sitename = namesites[ip + ":" + port]
                         print(f"message: {message} on {sitename}", time.asctime())
                     else:
                         print(f"message: {message} on {ip}:{port}", time.asctime())
@@ -615,7 +657,7 @@ def run():
             # loop.run_until_complete(asyncio.wait(tasks))
             t2 = time.time()
             print("time:", t2 - t1)
-        
+
         elif re.match("drop table", text):
             table_name = re.findall("drop\s+table\s+(.*?)\s*;", text)[0]
             table = etcd.get_prefix("/table/" + table_name)
@@ -629,14 +671,14 @@ def run():
             namesites = {}
             for i in sitenames:
                 ip, port, db = sitenames[i].split(":")
-                namesites[ip+":"+port] = i
+                namesites[ip + ":" + port] = i
 
             for i in etcd.get_prefix("/table/" + table_name + "/fragment"):
                 fragitem = eval(i[0])
                 ip, port, db = fragitem["site"].split(":")
-                sitename = ip+":"+port
-                if ip+":"+port in namesites:
-                    sitename = namesites[ip+":"+port]
+                sitename = ip + ":" + port
+                if ip + ":" + port in namesites:
+                    sitename = namesites[ip + ":" + port]
                 print("involved site:", sitename)
 
                 try:
@@ -646,7 +688,10 @@ def run():
                     response = client.Droptable(net_pb2.SQL(sql=text))
                     print(f"message: {response.status} on {sitename}", time.asctime())
                 except:
-                    print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                    print(
+                        f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                        time.asctime(),
+                    )
 
             etcd.delete_prefix("/table/" + table_name)
             tables = etcd.get("/table")[0]
@@ -656,7 +701,7 @@ def run():
 
             attrinfo = etcd.get_prefix("/attrinfo/")
             for i in attrinfo:
-                attr = eval(i[0])['attr']
+                attr = eval(i[0])["attr"]
                 if attr.split(".")[0] == table_name:
                     etcd.delete(i[1].key)
 
@@ -710,9 +755,7 @@ def run():
                     for comp in conditionlist:
                         # print(comp)
                         tempcomp = True
-                        left, op, right = re.findall(
-                            "(.+?)\s*([>=<]+)\s*(.+)", comp
-                        )[0]
+                        left, op, right = re.findall("(.+?)\s*([>=<]+)\s*(.+)", comp)[0]
                         left = left.strip(" ")
                         right = right.strip(" '\"")
                         op = op.strip(" ")
@@ -728,9 +771,7 @@ def run():
                 # print(row)
                 for j in range(fragmentlen):
                     if fragment[j]["conditions"] == "":
-                        data[j].append(
-                            [row[name] for name in fragment[j]["columns"]]
-                        )
+                        data[j].append([row[name] for name in fragment[j]["columns"]])
                     else:
                         # print(fragment[j]["conditions"])
                         # conditionlist = fragment[j]["conditions"].split("and")
@@ -790,31 +831,45 @@ def run():
                     print(f"insert data:{pickle.loads(response.data)}")
                     return (response.status, ip, port)
                 except:
-                    print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                    print(
+                        f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                        time.asctime(),
+                    )
                     return ("something is wrong", ip, port)
 
             sitenames = eval(etcd.get("sitenames")[0])
             namesites = {}
             for i in sitenames:
                 ip, port, db = sitenames[i].split(":")
-                namesites[ip+":"+port] = i
+                namesites[ip + ":" + port] = i
 
             # loop = asyncio.get_event_loop()
             tasks = []
             with ThreadPoolExecutor(max_workers=5) as t:
                 for i in range(len(fragment)):
                     subdata = data[i]
+                    len_of_fragment = len(subdata)
+                    # reverse_sitenames = {v:k for k,v in sitenames.items()}
+
+                    etcd.put(
+                        "/table/{}/lenfragment/{}".format(
+                            table_name, fragment[i]["sitename"]
+                        ),
+                        str(len_of_fragment),
+                    )
                     bytedata = pickle.dumps(subdata)
                     ip, port, db = fragment[i]["site"].split(":")
                     print("start", i)
                     # tasks.append(tmp(i, ip, port, table_name, fragment_columns, bytedata))
-                    task = t.submit(tmp, i, ip, port, table_name, fragment_columns, bytedata)
+                    task = t.submit(
+                        tmp, i, ip, port, table_name, fragment_columns, bytedata
+                    )
                     tasks.append(task)
-                
+
                 for future in as_completed(tasks):
                     message, ip, port = future.result()
-                    if ip+":"+port in namesites:
-                        sitename = namesites[ip+":"+port]
+                    if ip + ":" + port in namesites:
+                        sitename = namesites[ip + ":" + port]
                         print(f"message: {message} on {sitename}", time.asctime())
                     else:
                         print(f"message: {message} on {ip}:{port}", time.asctime())
@@ -825,16 +880,17 @@ def run():
             # t2 = time.time()
             # print("time:", t2 - t1)
 
-
         elif re.match("delete from", text):
             # delete from Customer where name='L. Morrison' AND rank=1;
             # delete from Customer where name='M. Hart' AND rank=3;
-            table_name, conditionlist = re.findall("delete\s+from\s+(.*?)(\s+where\s+.*?){0,1}\s*;", text)[0]
+            table_name, conditionlist = re.findall(
+                "delete\s+from\s+(.*?)(\s+where\s+.*?){0,1}\s*;", text
+            )[0]
             columnlist = []
             if conditionlist != "":
                 conditionlist = conditionlist.replace(" where ", "")
                 conditionlist = re.split(" and | or | AND | OR ", conditionlist)
-                columnlist = [re.split(">|<|=",i)[0].strip() for i in conditionlist]
+                columnlist = [re.split(">|<|=", i)[0].strip() for i in conditionlist]
             print(conditionlist)
             table = etcd.get_prefix("/table/" + table_name)
             tableexist = False
@@ -847,17 +903,17 @@ def run():
             namesites = {}
             for i in sitenames:
                 ip, port, db = sitenames[i].split(":")
-                namesites[ip+":"+port] = i
-            
+                namesites[ip + ":" + port] = i
+
             vertical = False
             fragmentlist = []
-            table_columns = eval(etcd.get("/table/"+table_name+"/columns")[0])
+            table_columns = eval(etcd.get("/table/" + table_name + "/columns")[0])
             print(table_columns)
             for i in etcd.get_prefix("/table/" + table_name + "/fragment"):
                 fragitem = eval(i[0])
                 fragmentlist.append(fragitem)
                 print(fragitem)
-                if len(fragitem['columns']) != len(table_columns):
+                if len(fragitem["columns"]) != len(table_columns):
                     # 简单考虑要么水平分片，要么垂直分片
                     vertical = True
 
@@ -867,10 +923,10 @@ def run():
             keycolumn = ""
             for fragitem in fragmentlist:
                 ip, port, db = fragitem["site"].split(":")
-                sitename = ip+":"+port
-                if ip+":"+port in namesites:
-                    sitename = namesites[ip+":"+port]
-                columns = fragitem['columns']
+                sitename = ip + ":" + port
+                if ip + ":" + port in namesites:
+                    sitename = namesites[ip + ":" + port]
+                columns = fragitem["columns"]
                 print("involved site:", sitename)
                 conn = grpc.insecure_channel(ip + ":" + port)
                 client = net_pb2_grpc.NetServiceStub(channel=conn)
@@ -883,9 +939,11 @@ def run():
                             if column in columns:
                                 # 说明这个条件属于这个分片上
                                 frag_where_columns.append(conditionlist[i])
-                        delete_sql = "delete from "+table_name
+                        delete_sql = "delete from " + table_name
                         if frag_where_columns != []:
-                            delete_sql += (" where " + " and ".join(frag_where_columns) + ";")
+                            delete_sql += (
+                                " where " + " and ".join(frag_where_columns) + ";"
+                            )
                         # if conditionlist != "" and set(columnlist) - set(columns) != set(): #如果条件中涉及到分块上没有的列
                         #     continue
                         print(delete_sql)
@@ -896,7 +954,10 @@ def run():
                         keycolumn = response.key
                         # print(f"data keys:{pickle.loads(response.data)}")
                     except:
-                        print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                        print(
+                            f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                            time.asctime(),
+                        )
                 else:
                     try:
                         print("start")
@@ -904,9 +965,14 @@ def run():
                         data = pickle.loads(response.data)
                         # print(f"delete data:{data}")
                         print(f"delete rows:{len(data)}")
-                        print(f"message: {response.status} on {sitename}", time.asctime())
+                        print(
+                            f"message: {response.status} on {sitename}", time.asctime()
+                        )
                     except:
-                        print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                        print(
+                            f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                            time.asctime(),
+                        )
 
             if vertical and columnlist != []:
                 for i, keys in enumerate(keyslist):
@@ -915,12 +981,20 @@ def run():
                         keyset = set(keys)
                     else:
                         keyset = keyset & set(keys)
-                
+
                 # 修改sql语句
                 # print(keyset)
                 delete_keys = [str(key[0]) for key in keyset]
                 # print(delete_keys)
-                delete_sql = "delete from "+ table_name + " where " + keycolumn + " in " + str("("+ ",".join(delete_keys) +")") + ";"
+                delete_sql = (
+                    "delete from "
+                    + table_name
+                    + " where "
+                    + keycolumn
+                    + " in "
+                    + str("(" + ",".join(delete_keys) + ")")
+                    + ";"
+                )
                 # print(delete_sql)
                 for i, client in enumerate(clientlist):
                     try:
@@ -929,9 +1003,14 @@ def run():
                         data = pickle.loads(response.data)
                         # print(f"delete data:{data}")
                         print(f"delete rows:{len(data)}")
-                        print(f"message: {response.status} on {sitename}", time.asctime())
+                        print(
+                            f"message: {response.status} on {sitename}", time.asctime()
+                        )
                     except:
-                        print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
+                        print(
+                            f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected",
+                            time.asctime(),
+                        )
 
                     # print("start")
                     # response = client.Deletedata(net_pb2.SQL(sql=text))
@@ -939,8 +1018,6 @@ def run():
                     # print(f"message: {response.status} on {sitename}", time.asctime())
                 # except:
                 #   print(f"there is no table {table_name} on {ip}:{port} or {ip}:{port} cannot be connected", time.asctime())
-
-
 
         elif re.match("define", text):
             # 定义站点名称
@@ -957,10 +1034,15 @@ def run():
                 ip, port, db = i.split(":")
                 if ip == sip and port == sport:
                     sitenames = etcd.get("sitenames")[0]
-                    if sitenames in [b"", b"[]", b"{}", None]: #sitenames is empty, a new sitenames
-                        print('sitenames is empty, a new sitenames')
+                    if sitenames in [
+                        b"",
+                        b"[]",
+                        b"{}",
+                        None,
+                    ]:  # sitenames is empty, a new sitenames
+                        print("sitenames is empty, a new sitenames")
                         sitenames = {sitename: ip + ":" + port + ":" + db}
-                        #print(sitenames)
+                        # print(sitenames)
                         etcd.put("sitenames", str(sitenames))
                         status = True
                     else:
@@ -970,18 +1052,20 @@ def run():
                             if ip + ":" + port + ":" + db == j[1]:
                                 old_sitename = j
                                 break
-                        if old_sitename != None: #sitenames contain the site, update_sitename
-                            print('sitenames contain the site, update_sitename')
+                        if (
+                            old_sitename != None
+                        ):  # sitenames contain the site, update_sitename
+                            print("sitenames contain the site, update_sitename")
                             print(old_sitename[0], sitename)
                             update_sitename(old_sitename[0], sitename)
                             sitenames = eval(etcd.get("sitenames")[0])
-                            #print(sitenames)
+                            # print(sitenames)
                             etcd.put("sitenames", str(sitenames))
                             status = True
-                        else: #sitenames not contain the site, add
-                            print('sitenames not contain the site, add')
+                        else:  # sitenames not contain the site, add
+                            print("sitenames not contain the site, add")
                             sitenames[sitename] = ip + ":" + port + ":" + db
-                            #print(sitenames)
+                            # print(sitenames)
                             etcd.put("sitenames", str(sitenames))
                             status = True
                     break
@@ -990,39 +1074,37 @@ def run():
             else:
                 print("ip port not in the cluster")
             pass
-        
+
         elif re.match("add info", text):
-            infos = text.split(' ')
-            writeinfo = {
-                'attr': infos[2],
-                'type': infos[3],
-                'numbers': infos[4:]
-            }
-            etcd.put("/attrinfo/"+infos[2], str(writeinfo))
-            if writeinfo['attr'].split(".")[0] not in eval(etcd.get("/table")[0]):
+            infos = text.split(" ")
+            writeinfo = {"attr": infos[2], "type": infos[3], "numbers": infos[4:]}
+            etcd.put("/attrinfo/" + infos[2], str(writeinfo))
+            if writeinfo["attr"].split(".")[0] not in eval(etcd.get("/table")[0]):
                 print("table", attr.split(".")[0], "not exist")
             else:
-                etcd.put("/attrinfo/"+infos[2], str(writeinfo))
+                etcd.put("/attrinfo/" + infos[2], str(writeinfo))
                 print("add info successfully!")
-            #pass
-        
+            # pass
+
         elif re.match("select", text):
             time1 = time.time()
             # 解析sql语句
             import create_tree_bak1 as tree
+
             nodes = tree.create_a_tree(text)
             print("node length:", len(nodes))
             # nodes = pickle.loads(etcd.get('/tree')[0])
             root_node_site = str(nodes[-1].site)
-            sitenames = eval(etcd.get('sitenames')[0])
-            #print(sitenames)
-            #print(root_node_site)
+            sitenames = eval(etcd.get("sitenames")[0])
+            # print(sitenames)
+            # print(root_node_site)
             ipportdb = sitenames[root_node_site]
             ip, port, db = ipportdb.split(":")
-            #print(nodes)
+            # print(nodes)
             # nodes2 = pickle.loads(etcd.get('/tree')[0])
-            
+
             from jr.jr_execute_grpc import nodes2str
+
             str_nodes = nodes2str(nodes)
             # str_nodes = "test sql"
             # root_node_site = "RUC"
@@ -1038,7 +1120,7 @@ def run():
                 response = client.start_jr(net_pb2.para_start_jr(str_nodes=str_nodes))
                 res_list = eval(response.res)
                 time2 = time.time()
-                print("cost time: ", time2-time1, " sec")
+                print("cost time: ", time2 - time1, " sec")
                 print("result table column: ", res_list[0])
                 # print("result: ", res_list[1])
                 print("result tuple len: ", len(res_list[1]))
@@ -1052,35 +1134,36 @@ def run():
                 print("broken site:", root_node_site)
                 print("one site may be wrong! Lost connection!")
 
-        elif re.match("temp gc", text):
-            sitenames = eval(etcd.get('sitenames')[0])
-            
-            for i in list(sitenames.items()):
-                print(i)
-                ip, port, db = i[1].split(":")
-                conn = grpc.insecure_channel(ip + ":" + port)
-                client = net_pb2_grpc.NetServiceStub(channel=conn)
-                try:
-                    response = client.temp_GC(net_pb2.para_temp_GC(para="0"))
-                    if response.res == "GC":
-                        print("GC")
-                    else:
-                        print("drop temp table error!")
-                except Exception as e:
-                    print(repr(e))
-                    print(i[0], "site can't not connected!")
-                
-
-        elif re.match("test", text):
-            ip = "10.77.70.61"
-            port = "8883"
-            conn = grpc.insecure_channel(ip + ":" + port)
-            client = net_pb2_grpc.NetServiceStub(channel=conn)
-            print("client")
-            response = client.Test(net_pb2.Data(data="test"))
-            print(response.data)
         else:
             pass
+        # elif re.match("temp gc", text):
+        #    sitenames = eval(etcd.get('sitenames')[0])
+        #
+        #    for i in list(sitenames.items()):
+        #        print(i)
+        #        ip, port, db = i[1].split(":")
+        #        conn = grpc.insecure_channel(ip + ":" + port)
+        #        client = net_pb2_grpc.NetServiceStub(channel=conn)
+        #        try:
+        #            response = client.temp_GC(net_pb2.para_temp_GC(para="0"))
+        #            if response.res == "GC":
+        #                print("GC")
+        #            else:
+        #                print("drop temp table error!")
+        #        except Exception as e:
+        #            print(repr(e))
+        #            print(i[0], "site can't not connected!")
+
+        # elif re.match("test", text):
+        #    ip = "10.77.70.61"
+        #    port = "8883"
+        #    conn = grpc.insecure_channel(ip + ":" + port)
+        #    client = net_pb2_grpc.NetServiceStub(channel=conn)
+        #    print("client")
+        #    response = client.Test(net_pb2.Data(data="test"))
+        #    print(response.data)
+        # else:
+        #    pass
         # table_name = re.findall("from\s+([_A-Za-z]+[0-9]*)\s*.*?;", text)
         # # print(table_name)
         # fragment = eval(etcd.get(table_name[0])[0])
@@ -1099,4 +1182,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-    # asyncio.run(run())

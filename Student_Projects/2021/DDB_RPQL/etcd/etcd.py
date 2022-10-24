@@ -1,7 +1,11 @@
 import etcd3
 import traceback
+import json
 
-serverlist = ["10.77.70.61:2379","10.77.70.62:2379","10.77.70.63:2379"]
+with open("../config.json") as f:
+    jsondata = json.loads(f.read())
+serverlist = jsondata["etcdserverlist"]
+
 
 class Etcd_S:
     def __init__(self, host, port):
@@ -86,7 +90,7 @@ class Etcd_S:
                 except:
                     pass
             traceback.print_exc()
-    
+
     def get_all(self):
         try:
             return self.etcd.get_all()
@@ -102,4 +106,3 @@ class Etcd_S:
                     pass
             traceback.print_exc()
             return
-            
